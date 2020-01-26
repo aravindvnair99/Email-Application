@@ -1,2 +1,50 @@
-# Software-Engineering-Amrita
+# Email Application
+
 Code from Software Engineering Lab project at Amrita School of Engineering, Bengaluru
+
+# :octocat: How to contribute?
+
+All contributions are welcome! Code, documentation, graphics or even design suggestions are welcome; use GitHub to its fullest. Submit pull requests, contribute tutorials or other wiki contents -- whatever you have to offer, it would be appreciated!
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on contributing.
+
+# :scroll: License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+# :family: Team
+
+* **Abhishek Venkata Sai Kandikattu** - *Scrum Master and Back-end Developer* - [Abhishek-Sai](https://github.com/Abhishek-Sai)
+* **Aravind V. Nair** - *Front-end and Back-end Developer* - [AravindVNair99](https://github.com/AravindVNair99)
+* **Harshita Reddy Edugudi** - *Front-end Developer* - [harshitaaaaa](https://github.com/harshitaaaaa)
+* **Aditya Deepak Udapudi** - *Front-end Developer* - [adityadu-18](https://github.com/adityadu-18)
+* **Golla Keerthana** - *Tester* - []()
+* **Abhinay Krishna Chitirala** - *Tester* - [abhinaychitirala](https://github.com/abhinaychitirala)
+
+See the full list of [contributors](https://github.com/aravindvnair99/Email-Application/graphs/contributors) who participated in this project and statistics.
+
+# :heavy_exclamation_mark: Prerequisites aka requirements
+
+Please read [Prerequisite](Prerequisite.md) file for details.
+
+# :bookmark: Releases
+
+View all versions [here](https://github.com/aravindvnair99/Email-Application/releases).
+
+# :scroll: Changelog
+
+Check the [changelog here](https://github.com/aravindvnair99/Email-Application/commits/master).
+
+# :memo: I found some bugs or issues. Where do I report?
+
+Report [here](https://github.com/aravindvnair99/Email-Application/issues/new/choose) in detail answering these questions:
+
+* What steps did you take to make the bug appear?
+* How can the bug be fixed? (In case you know)
+* Which OS and which all packages/software/dependencies are you using?
+* Have you tried any troubleshooting steps such as a reboot for example?
+* Have you followed the prescribed prerequisites?
+
+# :envelope: How do I contact the team?
+
+Check [here](https://github.com/aravindvnair99/Email-Application/graphs/contributors) for the list of contributors. Contact one of them through their profiles.
