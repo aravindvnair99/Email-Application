@@ -90,7 +90,7 @@ function setCookie(idToken, res) {
 app.get("/offline", (req, res) => {
 	res.render("offline");
 });
-app.get("/dashboard", (req, res) => {
+app.get("/dashboard", checkCookieMiddleware, (req, res) => {
 	res.send("hi");
 });
 
