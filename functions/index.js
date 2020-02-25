@@ -91,7 +91,7 @@ app.get("/offline", (req, res) => {
 	res.render("offline");
 });
 app.get("/dashboard", checkCookieMiddleware, (req, res) => {
-	res.send("hi");
+	res.render("dashboard");
 });
 
 /*=============================================>>>>>
