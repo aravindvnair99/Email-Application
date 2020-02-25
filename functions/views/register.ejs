@@ -29,7 +29,7 @@
 		<!--  Paper Dashboard core CSS    -->
 		<link href="../../assets/css/paper-dashboard.css" rel="stylesheet" />
 
-		<link href="../../assets/css/demo.css" rel="stylesheet" />
+		<link href="../../assets/css/main.css" rel="stylesheet" />
 		<script src="../../assets/js/main.js"></script>
 
 		<!--  Fonts and icons     -->
@@ -53,7 +53,7 @@
 				} else {
 					if (document.getElementsByName("email")[0].value.length < 11) {
 						alert("Please enter a valid email address.");
-						demo.showSwal('emailValid');
+						main.showSwal('emailValid');
 						return;
 					}
 					if (
@@ -61,7 +61,7 @@
 						document.getElementsByName("confirmPassword")[0].value
 					) {
 						alert("Password don't match");
-						demo.showSwal('passwordMatch');
+						main.showSwal('passwordMatch');
 						return;
 					}
 					firebase
@@ -80,7 +80,7 @@
 						.catch((error) => {
 							console.log(error.code);
 							console.log(error.message);
-							demo.showSwal(error.message);
+							main.showSwal(error.message);
 						});
 				}
 			}
@@ -90,7 +90,7 @@
 					if (user) {
 						console.log(user);
 					} else {
-						demo.showSwal('loginContinue');
+						main.showSwal('loginContinue');
 					}
 				});
 			}
@@ -303,6 +303,6 @@
 	<!-- Sweet Alert 2 plugin -->
 	<script src="../../assets/js/sweetalert2.js"></script>
 
-	<!-- Paper Dashboard PRO Core javascript and methods for Demo purpose -->
+	<!-- Paper Dashboard PRO Core javascript and methods for main purpose -->
 	<script src="../../assets/js/paper-dashboard.js"></script>
 </html>

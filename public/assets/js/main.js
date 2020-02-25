@@ -1,7 +1,7 @@
 type = ['', 'info', 'success', 'warning', 'danger'];
 
 
-demo = {
+main = {
 
     initCirclePercentage: function () {
 
@@ -927,7 +927,7 @@ demo = {
         },
 
         initFormExtendedSliders: function () {
-          // Sliders for demo purpose in refine cards section
+          // Sliders for main purpose in refine cards section
           var slider = document.getElementById('sliderRegular');
 
           noUiSlider.create(slider, {
