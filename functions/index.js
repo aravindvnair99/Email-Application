@@ -126,6 +126,23 @@ app.get("/login", (req, res) => {
 		res.render("login");
 	}
 });
+
+app.get("/", (req, res) => {
+	if (req.cookies.__session) {
+		res.redirect("/dashboard");
+	} else {
+		res.render("login");
+	}
+});
+
+app.get("/register", (req, res) => {
+	if (req.cookies.__session) {
+		res.redirect("/dashboard");
+	} else {
+		res.render("register");
+	}
+});
+
 app.get("/sessionLogin", (req, res) => {
 	setCookie(req.query.idToken, res);
 });
