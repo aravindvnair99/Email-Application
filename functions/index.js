@@ -87,30 +87,11 @@ function setCookie(idToken, res) {
 
 ===============================================>>>>>*/
 
-app.get("/", (req, res) => {
-	res.render("index");
-});
 app.get("/offline", (req, res) => {
 	res.render("offline");
 });
-
-/*=============================================>>>>>
-
-				= legal routes =
-
-===============================================>>>>>*/
-
-app.get("/EULA", (req, res) => {
-	res.render("legal/EULA");
-});
-app.get("/disclaimer", (req, res) => {
-	res.render("legal/disclaimer");
-});
-app.get("/privacyPolicy", (req, res) => {
-	res.render("legal/privacyPolicy");
-});
-app.get("/termsConditions", (req, res) => {
-	res.render("legal/termsConditions");
+app.get("/dashboard", (req, res) => {
+	res.send("hi");
 });
 
 /*=============================================>>>>>
@@ -119,14 +100,6 @@ app.get("/termsConditions", (req, res) => {
 
 ===============================================>>>>>*/
 
-app.get("/login", (req, res) => {
-	if (req.cookies.__session) {
-		res.redirect("/uid");
-	} else {
-		res.render("login");
-	}
-});
-
 app.get("/", (req, res) => {
 	if (req.cookies.__session) {
 		res.redirect("/dashboard");
@@ -135,25 +108,13 @@ app.get("/", (req, res) => {
 	}
 });
 
-app.get("/register", (req, res) => {
+app.get("/login", (req, res) => {
 	if (req.cookies.__session) {
-		res.redirect("/dashboard");
+		res.redirect("/uid");
 	} else {
-		res.render("register");
+		res.render("login");
 	}
 });
-
-app.get("/sessionLogin", (req, res) => {
-	setCookie(req.query.idToken, res);
-});
-app.get("/signOut", (req, res) => {
-	res.clearCookie("__session");
-	res.redirect("/login");
-});
-app.get("/uid", checkCookieMiddleware, (req, res) => {
-	res.send(req.decodedClaims.uid);
-});
-
 app.post("/onLogin", (req, res) => {
 	admin
 		.auth()
@@ -185,6 +146,55 @@ app.post("/onLogin", (req, res) => {
 			console.log(error);
 			res.send("/login");
 		});
+});
+app.get("/register", (req, res) => {
+	if (req.cookies.__session) {
+		res.redirect("/dashboard");
+	} else {
+		res.render("register");
+	}
+});
+app.post("/onRegister", (req, res) => {
+	if (req.cookies.__session) {
+		res.redirect("/dashboard");
+	} else {
+		console.log(
+			req.body.firstName,
+			req.body.lastName,
+			req.body.email,
+			req.body.password
+		);
+		admin
+			.auth()
+			.createUser({
+				email: req.body.email,
+				emailVerified: false,
+				password: req.body.password,
+				displayName: `req.body.firstName + req.body.lastName`,
+				photoURL:
+					"https://firebasestorage.googleapis.com/v0/b/se-lab-email.appspot.com/o/generic_user.png?alt=media&token=64e28393-abd3-4e11-9163-da7b93ada93d",
+				disabled: false
+			})
+			.then(function(userRecord) {
+				// See the UserRecord reference doc for the contents of userRecord.
+				console.log("Successfully created new user:", userRecord.uid);
+				console.log(userRecord);
+				res.redirect("/dashboard");
+			})
+			.catch(function(error) {
+				console.log("Error creating new user:", error);
+			});
+	}
+});
+app.get("/sessionLogin", (req, res) => {
+	setCookie(req.query.idToken, res);
+});
+app.get("/signOut", (req, res) => {
+	res.clearCookie("__session");
+	res.redirect("/login");
+});
+app.get("/uid", checkCookieMiddleware, (req, res) => {
+	res.send(req.decodedClaims.uid);
 });
 app.get("/emailVerification", (req, res) => {
 	res.render("emailVerification");
