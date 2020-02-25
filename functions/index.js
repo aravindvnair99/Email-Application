@@ -115,75 +115,11 @@ app.get("/login", (req, res) => {
 		res.render("login");
 	}
 });
-app.post("/onLogin", (req, res) => {
-	admin
-		.auth()
-		.verifyIdToken(req.body.idToken, true)
-		.then((decodedToken) => {
-			admin
-				.auth()
-				.getUser(decodedToken.uid)
-				.then((userRecord) => {
-					console.log(
-						"Successfully fetched user data:",
-						userRecord.toJSON()
-					);
-					if (userRecord.phoneNumber && userRecord.emailVerified) {
-						return res.send({ path: "/dashboard" });
-					} else if (!userRecord.emailVerified) {
-						return res.send({ path: "/emailVerification" });
-					} else {
-						return res.send({ path: "/updateProfile" });
-					}
-				})
-				.catch((error) => {
-					console.log("Error fetching user data:", error);
-					res.send("/login");
-				});
-			return;
-		})
-		.catch((error) => {
-			console.log(error);
-			res.send("/login");
-		});
-});
 app.get("/register", (req, res) => {
 	if (req.cookies.__session) {
 		res.redirect("/dashboard");
 	} else {
 		res.render("register");
-	}
-});
-app.post("/onRegister", (req, res) => {
-	if (req.cookies.__session) {
-		res.redirect("/dashboard");
-	} else {
-		console.log(
-			req.body.firstName,
-			req.body.lastName,
-			req.body.email,
-			req.body.password
-		);
-		admin
-			.auth()
-			.createUser({
-				email: req.body.email,
-				emailVerified: false,
-				password: req.body.password,
-				displayName: `req.body.firstName + req.body.lastName`,
-				photoURL:
-					"https://firebasestorage.googleapis.com/v0/b/se-lab-email.appspot.com/o/generic_user.png?alt=media&token=64e28393-abd3-4e11-9163-da7b93ada93d",
-				disabled: false
-			})
-			.then(function(userRecord) {
-				// See the UserRecord reference doc for the contents of userRecord.
-				console.log("Successfully created new user:", userRecord.uid);
-				console.log(userRecord);
-				res.redirect("/dashboard");
-			})
-			.catch(function(error) {
-				console.log("Error creating new user:", error);
-			});
 	}
 });
 app.get("/sessionLogin", (req, res) => {
@@ -195,9 +131,6 @@ app.get("/signOut", (req, res) => {
 });
 app.get("/uid", checkCookieMiddleware, (req, res) => {
 	res.send(req.decodedClaims.uid);
-});
-app.get("/emailVerification", (req, res) => {
-	res.render("emailVerification");
 });
 app.get("/updateProfile", (req, res) => {
 	res.render("updateProfile");
