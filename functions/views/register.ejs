@@ -29,6 +29,9 @@
 		<!--  Paper Dashboard core CSS    -->
 		<link href="../../assets/css/paper-dashboard.css" rel="stylesheet" />
 
+		<link href="../../assets/css/demo.css" rel="stylesheet" />
+		<script src="../../assets/js/main.js"></script>
+
 		<!--  Fonts and icons     -->
 		<link
 			href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
@@ -50,6 +53,7 @@
 				} else {
 					if (document.getElementsByName("email")[0].value.length < 11) {
 						alert("Please enter a valid email address.");
+						demo.showSwal('emailValid');
 						return;
 					}
 					if (
@@ -57,6 +61,7 @@
 						document.getElementsByName("confirmPassword")[0].value
 					) {
 						alert("Password don't match");
+						demo.showSwal('passwordMatch');
 						return;
 					}
 					firebase
@@ -75,6 +80,7 @@
 						.catch((error) => {
 							console.log(error.code);
 							console.log(error.message);
+							demo.showSwal(error.message);
 						});
 				}
 			}
@@ -84,7 +90,7 @@
 					if (user) {
 						console.log(user);
 					} else {
-						alert("login to continue");
+						demo.showSwal('loginContinue');
 					}
 				});
 			}
