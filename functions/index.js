@@ -46,7 +46,14 @@ function checkCookieMiddleware(req, res, next) {
 			res.redirect("/login");
 		});
 }
-function setCookie(idToken, res) {
+function checkValidUser (req, res, next) {
+	if (req.decodedClaims.phone_number && req.decodedClaims.email_verified) {
+		next();
+	} else {
+		return res.redirect("/updateProfile");
+	}
+}
+function setCookieLogin(idToken, res) {
 	const expiresIn = 60 * 60 * 24 * 5 * 1000;
 	admin
 		.auth()
@@ -63,7 +70,48 @@ function setCookie(idToken, res) {
 					.auth()
 					.verifyIdToken(idToken)
 					.then((decodedClaims) => {
-						res.redirect("/uid");
+						console.log(decodedClaims);
+						if (
+							decodedClaims.phone_number &&
+							decodedClaims.email_verified
+						) {
+							return res.redirect("/dashboard");
+						} else {
+							return res.redirect("/updateProfile");
+						}
+					})
+					.catch((error) => {
+						console.log(error);
+					});
+				return;
+			},
+			(error) => {
+				console.log(error);
+				res.status(401).send("UNAUTHORIZED REQUEST!");
+			}
+		)
+		.catch((error) => {
+			console.log(error);
+		});
+}
+function setCookieRegister(idToken, res) {
+	const expiresIn = 60 * 60 * 24 * 5 * 1000;
+	admin
+		.auth()
+		.createSessionCookie(idToken, { expiresIn })
+		.then(
+			(sessionCookie) => {
+				const options = {
+					maxAge: expiresIn,
+					httpOnly: true,
+					secure: false //should be true in prod
+				};
+				res.cookie("__session", sessionCookie, options);
+				admin
+					.auth()
+					.verifyIdToken(idToken)
+					.then((decodedClaims) => {
+						res.redirect("/updateProfile");
 						return console.log(decodedClaims);
 					})
 					.catch((error) => {
@@ -90,10 +138,15 @@ function setCookie(idToken, res) {
 app.get("/offline", (req, res) => {
 	res.render("offline");
 });
-app.get("/dashboard", checkCookieMiddleware, (req, res) => {
-	res.render("dashboard");
+app.get("/lock", (req, res) => {
+	res.render("lock");
 });
-app.get("/contacts", checkCookieMiddleware, (req, res) => {
+app.get("/dashboard", checkCookieMiddleware, checkValidUser, (req, res) => {
+	obj = Object.assign({}, req.decodedClaims);
+	console.log("\n\n\n\n", req.decodedClaims);
+	res.render("dashboard", { obj });
+});
+app.get("/contacts", checkCookieMiddleware, checkValidUser, (req, res) => {
 	res.render("contacts");
 });
 
@@ -113,10 +166,13 @@ app.get("/", (req, res) => {
 
 app.get("/login", (req, res) => {
 	if (req.cookies.__session) {
-		res.redirect("/uid");
+		res.redirect("/dashboard");
 	} else {
 		res.render("login");
 	}
+});
+app.get("/sessionLogin", (req, res) => {
+	setCookieLogin(req.query.idToken, res);
 });
 app.get("/register", (req, res) => {
 	if (req.cookies.__session) {
@@ -125,8 +181,8 @@ app.get("/register", (req, res) => {
 		res.render("register");
 	}
 });
-app.get("/sessionLogin", (req, res) => {
-	setCookie(req.query.idToken, res);
+app.get("/sessionRegister", (req, res) => {
+	setCookieRegister(req.query.idToken, res);
 });
 app.get("/signOut", (req, res) => {
 	res.clearCookie("__session");
@@ -135,21 +191,37 @@ app.get("/signOut", (req, res) => {
 app.get("/uid", checkCookieMiddleware, (req, res) => {
 	res.send(req.decodedClaims.uid);
 });
-app.get("/updateProfile", (req, res) => {
-	res.render("updateProfile");
+app.get("/updateProfile", checkCookieMiddleware, (req, res) => {
+	user = Object.assign({}, req.decodedClaims);
+	res.render("updateProfile", { user });
 });
-app.post("/onUpdateProfile", (req, res) => {
+app.post("/onUpdateProfile", checkCookieMiddleware, (req, res) => {
+	console.log(
+		req.body.countryCode,
+		req.body.mobile,
+		req.body.firstName,
+		req.body.lastName
+	);
 	admin
 		.auth()
-		.updateUser(req.body.uid, {
-			phoneNumber: "+91" + req.body.phoneNumber,
-			password: req.body.password,
+		.updateUser(req.decodedClaims.uid, {
+			phoneNumber: req.body.countryCode + req.body.mobile,
 			displayName: req.body.firstName + " " + req.body.lastName,
-			photoURL: req.body.photoURL
+			emailVerified: true
 		})
 		.then((userRecord) => {
 			console.log("Successfully updated user", userRecord.toJSON());
-			return res.redirect("/login");
+			db.collection("users")
+				.doc(userRecord.uid)
+				.set({
+					DOB: req.body.DOB,
+					"Address Line 1": req.body.address1,
+					"Address Line 2": req.body.address2,
+					city: req.body.city,
+					country: req.body.country,
+					bio: req.body.bio
+				});
+			return res.redirect("/signOut");
 		})
 		.catch((error) => {
 			console.log("Error updating user:", error);
