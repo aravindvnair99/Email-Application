@@ -7421,7 +7421,8 @@ fieldset[disabled] .btn-neutral.active {
 
 /*     General overwrite     */
 body {
-    color: #66615b;
+    background-color: #66615b;
+    color: #fff;
     font-size: 14px;
     font-family: 'Muli', Arial, sans-serif;
 }
