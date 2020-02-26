@@ -49,6 +49,7 @@ function checkCookieMiddleware(req, res, next) {
 function checkValidUser(req, res, next) {
 	if (req.decodedClaims.phone_number && req.decodedClaims.email_verified) {
 		next();
+		return;
 	} else {
 		return res.redirect("/updateProfile");
 	}
@@ -204,7 +205,7 @@ app.post("/passwordReset", (req, res) => {
 			.getUserByEmail(req.body.email)
 			.then((userRecord) => {
 				userRecord = Object.assign({}, userRecord);
-				res.render("passwordReset", { userRecord });
+				return res.render("passwordReset", { userRecord });
 			})
 			.catch((error) => {
 				console.log("Error fetching user data:", error);
