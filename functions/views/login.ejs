@@ -67,11 +67,11 @@
 					firebase.auth().signOut();
 				} else {
 					if (document.getElementById("email").value.length < 11) {
-						alert("Please enter a valid email address.");
+						main.showSwal('emailValid');
 						return;
 					}
 					if (document.getElementById("password").value.length < 8) {
-						alert("Please enter a valid password");
+						main.showSwal('passwordMatch');
 						return;
 					}
 					firebase
