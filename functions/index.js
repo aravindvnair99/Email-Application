@@ -46,7 +46,7 @@ function checkCookieMiddleware(req, res, next) {
 			res.redirect("/login");
 		});
 }
-function checkValidUser (req, res, next) {
+function checkValidUser(req, res, next) {
 	if (req.decodedClaims.phone_number && req.decodedClaims.email_verified) {
 		next();
 	} else {
@@ -187,6 +187,29 @@ app.get("/sessionRegister", (req, res) => {
 app.get("/signOut", (req, res) => {
 	res.clearCookie("__session");
 	res.redirect("/login");
+});
+app.get("/forgotPassword", (req, res) => {
+	if (req.cookies.__session) {
+		res.redirect("/dashboard");
+	} else {
+		res.render("forgotPassword");
+	}
+});
+app.post("/passwordReset", (req, res) => {
+	if (req.cookies.__session) {
+		res.redirect("/dashboard");
+	} else {
+		admin
+			.auth()
+			.getUserByEmail(req.body.email)
+			.then((userRecord) => {
+				userRecord = Object.assign({}, userRecord);
+				res.render("passwordReset", { userRecord });
+			})
+			.catch((error) => {
+				console.log("Error fetching user data:", error);
+			});
+	}
 });
 app.get("/uid", checkCookieMiddleware, (req, res) => {
 	res.send(req.decodedClaims.uid);
