@@ -52,7 +52,6 @@
 					firebase.auth().signOut();
 				} else {
 					if (document.getElementsByName("email")[0].value.length < 11) {
-						alert("Please enter a valid email address.");
 						main.showSwal('emailValid');
 						return;
 					}
@@ -60,7 +59,6 @@
 						document.getElementsByName("password")[0].value !==
 						document.getElementsByName("confirmPassword")[0].value
 					) {
-						alert("Password don't match");
 						main.showSwal('passwordMatch');
 						return;
 					}
