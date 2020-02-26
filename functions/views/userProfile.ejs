@@ -15,7 +15,7 @@
 		/>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-		<title>Update Profile | Email Application</title>
+		<title>User Profile | Email Application</title>
 
 		<meta
 			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
@@ -77,30 +77,41 @@
 							<img src="../../assets/img/faces/face-2.jpg" />
 						</div>
 						<div class="info">
-							<a>
+							<a
+								data-toggle="collapse"
+								href="#collapseExample"
+								class="collapsed"
+							>
 								<span>
 									Chet Faker
+									<b class="caret"></b>
 								</span>
 							</a>
 							<div class="clearfix"></div>
 
-							<div>
+							<div class="collapse" id="collapseExample">
 								<ul class="nav">
 									<li>
-										<a href="/signOut">
-											<span class="sidebar-mini">SO</span>
+										<a href="#profile">
+											<span class="sidebar-mini">Mp</span>
 											<span class="sidebar-normal"
-												>Sign Out</span
+												>My Profile</span
 											>
 										</a>
 									</li>
 									<li>
-										<a href="/lock">
-											<span class="sidebar-mini"
-												>LSP</span
-											>
+										<a href="#edit">
+											<span class="sidebar-mini">Ep</span>
 											<span class="sidebar-normal"
-												>Lock Screen Page</span
+												>Edit Profile</span
+											>
+										</a>
+									</li>
+									<li>
+										<a href="#settings">
+											<span class="sidebar-mini">S</span>
+											<span class="sidebar-normal"
+												>Settings</span
 											>
 										</a>
 									</li>
@@ -108,6 +119,37 @@
 							</div>
 						</div>
 					</div>
+					<ul class="nav">
+						<li>
+							<a data-toggle="collapse" href="#dashboardOverview">
+								<i class="ti-panel"></i>
+								<p>
+									Dashboard
+									<b class="caret"></b>
+								</p>
+							</a>
+							<div class="collapse" id="dashboardOverview">
+								<ul class="nav">
+									<li>
+										<a href="../dashboard/overview.html">
+											<span class="sidebar-mini">O</span>
+											<span class="sidebar-normal"
+												>Overview</span
+											>
+										</a>
+									</li>
+									<li>
+										<a href="../dashboard/stats.html">
+											<span class="sidebar-mini">S</span>
+											<span class="sidebar-normal"
+												>Stats</span
+											>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
 
@@ -226,15 +268,84 @@
 												alt="..."
 											/>
 											<h4 class="card-title">
-												<%- user.email -%><br />
-												<!-- <a href="#"><small>@chetfaker</small></a> -->
+												<%- user.name -%><br />
+												<a href="#"
+													><small
+														><%- user.email
+														-%></small
+													></a
+												>
 											</h4>
 										</div>
 										<p class="description text-center">
-											"I like the way you work it <br />
-											No diggity <br />
-											I wanna bag it up"
+											<%- userProfile.bio -%>
 										</p>
+									</div>
+									<hr />
+									<!-- <div class="text-center">
+										<div class="row">
+											<div
+												class="col-md-3 col-md-offset-1"
+											>
+												<h5>
+													12<br /><small>Files</small>
+												</h5>
+											</div>
+											<div class="col-md-4">
+												<h5>
+													2GB<br /><small>Used</small>
+												</h5>
+											</div>
+											<div class="col-md-3">
+												<h5>
+													24,6$<br /><small
+														>Spent</small
+													>
+												</h5>
+											</div>
+										</div>
+									</div> -->
+								</div>
+								<div class="card">
+									<div class="card-header">
+										<h4 class="card-title">Contacts</h4>
+									</div>
+									<div class="card-content">
+										<ul class="list-unstyled team-members">
+											<li>
+												<div class="row">
+													<div class="col-xs-3">
+														<div class="avatar">
+															<img
+																src="../../assets/img/faces/face-3.jpg"
+																alt="Circle Image"
+																class="img-circle img-no-padding img-responsive"
+															/>
+														</div>
+													</div>
+													<div class="col-xs-6">
+														Name
+														<br />
+														<span
+															class="text-danger"
+															><small
+																>email</small
+															></span
+														>
+													</div>
+													<div
+														class="col-xs-3 text-right"
+													>
+														<btn
+															class="btn btn-sm btn-success btn-icon"
+															><i
+																class="fa fa-envelope"
+															></i
+														></btn>
+													</div>
+												</div>
+											</li>
+										</ul>
 									</div>
 								</div>
 							</div>
@@ -246,7 +357,7 @@
 									<div class="card-content">
 										<form
 											method="POST"
-											action="/onUpdateProfile"
+											action="/onUserProfileUpdate"
 										>
 											<div class="row">
 												<div class="col-md-6">
@@ -260,6 +371,7 @@
 															name="DOB"
 															class="form-control border-input"
 															autocomplete="bday"
+															value="<%- userProfile.DOB -%>"
 														/>
 													</div>
 												</div>
@@ -289,6 +401,7 @@
 															type="tel"
 															name="countryCode"
 															class="form-control border-input"
+															id="countryCode"
 															autocomplete="tel-country-code"
 														/>
 													</div>
@@ -302,6 +415,7 @@
 														<input
 															type="tel"
 															name="mobile"
+															id="mobile"
 															class="form-control border-input"
 															autocomplete="tel-national"
 														/>
@@ -319,6 +433,7 @@
 															class="form-control border-input"
 															placeholder="First Name"
 															name="firstName"
+															id="firstName"
 															autocomplete="given-name"
 														/>
 													</div>
@@ -331,6 +446,7 @@
 															class="form-control border-input"
 															placeholder="Last Name"
 															name="lastName"
+															id="lastName"
 															autocomplete="family-name"
 														/>
 													</div>
@@ -349,6 +465,7 @@
 															name="address1"
 															placeholder="Address Line 1"
 															autocomplete="address-line1"
+															value="<%- userProfile.addressLine1 -%>"
 														/>
 													</div>
 												</div>
@@ -366,6 +483,7 @@
 															name="address2"
 															placeholder="Address Line 2"
 															autocomplete="address-line2"
+															value="<%- userProfile.addressLine2 -%>"
 														/>
 													</div>
 												</div>
@@ -380,6 +498,7 @@
 															name="city"
 															placeholder="City"
 															autocomplete="address-level2"
+															value="<%- userProfile.city -%>"
 														/>
 													</div>
 												</div>
@@ -392,6 +511,7 @@
 															class="form-control border-input"
 															placeholder="Country"
 															autocomplete="country-name"
+															value="<%- userProfile.country -%>"
 														/>
 													</div>
 												</div>
@@ -406,6 +526,7 @@
 															class="form-control border-input"
 															placeholder="Postal Code"
 															autocomplete="postal-code"
+															value="<%- userProfile.postalCode -%>"
 														/>
 													</div>
 												</div>
@@ -419,6 +540,7 @@
 															class="form-control border-input"
 															placeholder="Here can be your description"
 															name="bio"
+															value="<%- userProfile.bio -%>"
 														/>
 													</div>
 												</div>
@@ -547,4 +669,18 @@
 
 	<!-- Paper Dashboard PRO main methods, don't include it in your project! -->
 	<script src="../../assets/js/main.js"></script>
+	<script>
+		document.getElementById("firstName").value = `<%- user.name -%>`.split(
+			" "
+		)[0];
+		document.getElementById("lastName").value = `<%- user.name -%>`.split(
+			" "
+		)[1];
+		document.getElementById(
+			"countryCode"
+		).value = `<%- user.phone_number -%>`.slice(0, -10);
+		document.getElementById(
+			"mobile"
+		).value = `<%- user.phone_number -%>`.slice(-10);
+	</script>
 </html>
