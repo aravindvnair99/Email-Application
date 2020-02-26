@@ -51,15 +51,17 @@
 				if (firebase.auth().currentUser) {
 					firebase.auth().signOut();
 				} else {
-					if (document.getElementsByName("email")[0].value.length < 11) {
-						main.showSwal('emailValid');
+					if (
+						document.getElementsByName("email")[0].value.length < 11
+					) {
+						main.showSwal("emailValid");
 						return;
 					}
 					if (
 						document.getElementsByName("password")[0].value !==
 						document.getElementsByName("confirmPassword")[0].value
 					) {
-						main.showSwal('passwordMatch');
+						main.showSwal("passwordMatch");
 						return;
 					}
 					firebase
@@ -80,12 +82,14 @@
 				}
 			}
 			function initApp() {
-				firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+				firebase
+					.auth()
+					.setPersistence(firebase.auth.Auth.Persistence.NONE);
 				firebase.auth().onAuthStateChanged((user) => {
 					if (user) {
 						user.getIdToken()
 							.then((idToken) => {
-                                alert(idToken)
+								alert(idToken);
 								window.location.href =
 									"/sessionRegister?idToken=" + idToken;
 							})
@@ -93,7 +97,7 @@
 								alert(error);
 							});
 					} else {
-						main.showSwal('loginContinue');
+						main.showSwal("loginContinue");
 					}
 				});
 			}

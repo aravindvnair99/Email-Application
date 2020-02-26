@@ -215,17 +215,27 @@ app.post("/passwordReset", (req, res) => {
 app.get("/uid", checkCookieMiddleware, (req, res) => {
 	res.send(req.decodedClaims.uid);
 });
-app.get("/updateProfile", checkCookieMiddleware, (req, res) => {
-	user = Object.assign({}, req.decodedClaims);
-	res.render("updateProfile", { user });
+app.get("/userProfile", checkCookieMiddleware, (req, res) => {
+	db.collection("users")
+		.doc(req.decodedClaims.uid)
+		.get()
+		.then((doc) => {
+			if (!doc.exists) {
+				console.log("No such document!");
+				res.redirect("/login");
+			} else {
+				user = Object.assign({}, req.decodedClaims);
+				userProfile = Object.assign({}, doc.data());
+				console.log(user);
+				res.render("userProfile", { userProfile, user });
+			}
+		})
+		.catch((err) => {
+			console.log("Error getting document", err);
+			res.redirect("/login");
+		});
 });
-app.post("/onUpdateProfile", checkCookieMiddleware, (req, res) => {
-	console.log(
-		req.body.countryCode,
-		req.body.mobile,
-		req.body.firstName,
-		req.body.lastName
-	);
+app.post("/onUserProfileUpdate", checkCookieMiddleware, (req, res) => {
 	admin
 		.auth()
 		.updateUser(req.decodedClaims.uid, {
@@ -239,11 +249,47 @@ app.post("/onUpdateProfile", checkCookieMiddleware, (req, res) => {
 				.doc(userRecord.uid)
 				.set({
 					DOB: req.body.DOB,
-					"Address Line 1": req.body.address1,
-					"Address Line 2": req.body.address2,
+					addressLine1: req.body.address1,
+					addressLine2: req.body.address2,
 					city: req.body.city,
 					country: req.body.country,
-					bio: req.body.bio
+					bio: req.body.bio,
+					postalCode: req.body.postalCode
+				});
+			return res.redirect("/signOut");
+		})
+		.catch((error) => {
+			console.log("Error updating user:", error);
+		});
+});
+app.get("/updateProfile", checkCookieMiddleware, (req, res) => {
+	if (req.decodedClaims.phone_number && req.decodedClaims.email_verified) {
+		res.redirect("/dashboard");
+	} else {
+		user = Object.assign({}, req.decodedClaims);
+		res.render("updateProfile", { user });
+	}
+});
+app.post("/onUpdateProfile", checkCookieMiddleware, (req, res) => {
+	admin
+		.auth()
+		.updateUser(req.decodedClaims.uid, {
+			phoneNumber: req.body.countryCode + req.body.mobile,
+			displayName: req.body.firstName + " " + req.body.lastName,
+			emailVerified: true
+		})
+		.then((userRecord) => {
+			console.log("Successfully updated user", userRecord.toJSON());
+			db.collection("users")
+				.doc(userRecord.uid)
+				.set({
+					DOB: req.body.DOB,
+					addressLine1: req.body.address1,
+					addressLine2: req.body.address2,
+					city: req.body.city,
+					country: req.body.country,
+					bio: req.body.bio,
+					postalCode: req.body.postalCode
 				});
 			return res.redirect("/signOut");
 		})
