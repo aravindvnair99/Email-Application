@@ -51,7 +51,7 @@ function checkValidUser(req, res, next) {
 		next();
 		return;
 	} else {
-		return res.redirect("/updateProfile");
+		res.redirect("/updateProfile");
 	}
 }
 function setCookieLogin(idToken, res) {
