@@ -222,12 +222,12 @@ app.get("/userProfile", checkCookieMiddleware, (req, res) => {
 		.then((doc) => {
 			if (!doc.exists) {
 				console.log("No such document!");
-				res.redirect("/login");
+				return res.redirect("/login");
 			} else {
 				user = Object.assign({}, req.decodedClaims);
 				userProfile = Object.assign({}, doc.data());
 				console.log(user);
-				res.render("userProfile", { userProfile, user });
+				return res.render("userProfile", { userProfile, user });
 			}
 		})
 		.catch((err) => {
