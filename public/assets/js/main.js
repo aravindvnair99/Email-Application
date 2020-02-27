@@ -690,13 +690,20 @@ main = {
             timer: 1250,
             showConfirmButton: false
           });
-        } else if (type == 'emailValid') {
+        } else if (type == 'emailInvalid') {
           swal({
-            title: "Please enter a valid email address",
+            title: "Should start with letter and end with @email.com",
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success btn-fill"
           });
-        } else if (type == 'passwordMatch') {
+        }else if (type == 'wrongPattern') {
+          swal({
+            title: "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters",
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success btn-fill"
+          });
+        }
+         else if (type == 'passwordNoMatch') {
           swal({
             title: "Password don't match",
             buttonsStyling: false,
