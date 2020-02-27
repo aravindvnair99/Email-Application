@@ -52,16 +52,23 @@
 					firebase.auth().signOut();
 				} else {
 					if (
-						document.getElementsByName("email")[0].value.length < 11
+						(document.getElementsByName("email")[0].value.length < 11) || (document.getElementsByName("email")[0].value.slice(-10) !== "@email.com")
 					) {
-						main.showSwal("emailValid");
+						main.showSwal("emailInvalid");
+						return;
+					}
+					var patt = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+					if (
+						!patt.test(document.getElementsByName("password")[0].value)
+					) {
+						main.showSwal("wrongPattern");
 						return;
 					}
 					if (
 						document.getElementsByName("password")[0].value !==
 						document.getElementsByName("confirmPassword")[0].value
 					) {
-						main.showSwal("passwordMatch");
+						main.showSwal("passwordNoMatch");
 						return;
 					}
 					firebase
@@ -198,8 +205,6 @@
 													class="form-control"
 													name="email"
 													autocomplete="email"
-													pattern="[a-z][a-z0-9._%+-]+@email.com$"
-													title="Should start with letter and end with @email.com"
 													required
 												/>
 											</div>
@@ -210,8 +215,6 @@
 													class="form-control"
 													name="password"
 													autocomplete="new-password"
-													pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-													title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
 													required
 												/>
 											</div>
@@ -223,7 +226,6 @@
 													name="confirmPassword"
 													autocomplete="new-password"
 													pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-													title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
 													required
 												/>
 											</div>
