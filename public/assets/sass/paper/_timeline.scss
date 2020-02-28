@@ -1,7 +1,7 @@
 .card-timeline{
     .timeline {
         list-style: none;
-        padding: 20px 0 20px;
+        padding: 20px 0;
         position: relative;
 
         &:before {
@@ -19,7 +19,7 @@
         h6{
             color: $dark-gray;
             font-weight: 400;
-            margin: 10px 0px 0px;
+            margin: 10px 0 0;
         }
 
         &.timeline-simple{

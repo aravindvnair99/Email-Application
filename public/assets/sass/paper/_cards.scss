@@ -35,7 +35,7 @@
 
     .card-header{
 //         padding: 15px 15px 0px;
-        padding: 20px 15px 0px;
+        padding: 20px 15px 0;
         position: relative;
         border-radius: $border-radius-small-top;
         z-index: 3;
@@ -48,7 +48,7 @@
         }
 
         .category{
-            padding: 5px 0px;
+            padding: 5px 0;
         }
 
     }
@@ -72,7 +72,7 @@
         font-size: $font-size-base;
         font-weight: $font-weight-normal;
         color: $dark-gray;
-        margin-bottom: 0px;
+        margin-bottom: 0;
 
         i{
             font-size: $font-paragraph;
@@ -91,10 +91,10 @@
     }
 
     .card-content{
-        padding: 15px 15px 10px 15px;
+        padding: 15px 15px 10px;
 
         .card-title{
-            margin: 10px 0 20px 0;
+            margin: 10px 0 20px;
         }
 
         .big-title{
@@ -129,7 +129,7 @@
                 border-radius: 0 0 0 6px;
             }
             .btn:last-child{
-                border-radius: 0 0 6px 0;
+                border-radius: 0 0 6px;
             }
         }
 
@@ -209,7 +209,7 @@
     }
     ul.team-members{
         li{
-            padding: 10px 0px;
+            padding: 10px 0;
             &:not(:last-child){
                 border-bottom: 1px solid $medium-pale-bg;
             }
@@ -235,13 +235,13 @@
             margin-bottom: 10px;
         }
         .card-content{
-            padding: 10px 15px 10px;
+            padding: 10px 15px;
             text-align: center;
         }
     }
 
     .bootstrap-table{
-        padding: 0px 20px;
+        padding: 0 20px;
     }
 
     &[data-background-color="blue"],
@@ -342,7 +342,7 @@
 
     .card-header{
         .category{
-            padding: 0px;
+            padding: 0;
         }
     }
     .card-content{
@@ -536,7 +536,7 @@
     .card-footer{
         padding: 20px 0 0;
         .forgot{
-            padding: 20px 0px 0px;
+            padding: 20px 0 0;
         }
     }
 }

@@ -22,9 +22,9 @@
     }
 
     .logo{
-        padding: 18px 0px;
+        padding: 18px 0;
         margin: 0;
-        box-shadow: inset -1px 0px 0px 0px #cfcfca;
+        box-shadow: inset -1px 0 0 0 #cfcfca;
         height: 75px;
         position: relative;
         z-index: 4;
@@ -42,7 +42,7 @@
         a.logo-normal{
             display: block;
             opacity: 1;
-            @include transform-translate-x(0px);
+            @include transform-translate-x(0);
         }
 
 
@@ -58,14 +58,14 @@
         p{
             float: left;
             font-size: 20px;
-            margin: 10px 10px;
+            margin: 10px;
             line-height: 20px;
         }
 
         &:before{
             content: "";
             position: absolute;
-            bottom: 0px;
+            bottom: 0;
             right: 15px;
             width: calc(100% - 30px);
             height: 1px;
@@ -78,7 +78,7 @@
         overflow: auto;
         padding-bottom: 80px;
         z-index: 4;
-        box-shadow: inset -1px 0px 0px 0px $medium-gray;
+        box-shadow: inset -1px 0 0 0 $medium-gray;
         width: 260px;
 
         .dropdown.open .dropdown-backdrop{
@@ -99,7 +99,7 @@
 
             li{
                 > a{
-                    margin: 10px 0px 0px;
+                    margin: 10px 0 0;
                     padding-left: 25px;
                     padding-right: 25px;
                     opacity: .7;
@@ -140,7 +140,7 @@
                 font-weight: 600;
                 text-transform: uppercase;
                 position: relative;
-                @include transform-translate-x(0px);
+                @include transform-translate-x(0);
                 opacity: 1;
                 display: block;
                 height: auto;
@@ -164,7 +164,7 @@
                 .sidebar-normal{
                     margin: 0;
                     position: relative;
-                    @include transform-translate-x(0px);
+                    @include transform-translate-x(0);
                     opacity: 1;
                     white-space: nowrap;
                     display: block;
@@ -196,7 +196,7 @@
         &:after{
             content: "";
             position: absolute;
-            bottom: 0px;
+            bottom: 0;
             right: 15px;
             width: calc(100% - 30px);
             height: 1px;
@@ -242,7 +242,7 @@
             .caret{
                 position: absolute;
                 top: 11px;
-                right: 0px;
+                right: 0;
             }
         }
     }
@@ -319,7 +319,7 @@
     width: $sidebar-width;
 
     > .content{
-        padding: 30px 15px 0 15px;
+        padding: 30px 15px 0;
         min-height: calc(100vh - 123px);
 
         .row .col-md-12 > .title{
@@ -400,7 +400,7 @@
             .logo{
                 a.logo-normal{
                     opacity: 1;
-                    @include transform-translate-x(0px);
+                    @include transform-translate-x(0);
                 }
             }
 
@@ -411,7 +411,7 @@
                 > .nav [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
                 .user .info [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
                 .user .info > a > span{
-                    @include transform-translate-x(0px);
+                    @include transform-translate-x(0);
                     opacity: 1;
                 }
 

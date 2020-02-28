@@ -7,7 +7,7 @@
     border: 0 none;
     border-radius: $border-radius-extreme;
     margin-top: 5px;
-    padding: 0px;
+    padding: 0;
     @include box-shadow($dropdown-shadow);
 
     .dropdown &,
@@ -135,7 +135,7 @@
 
     .divider{
         background-color: $medium-pale-bg;
-        margin: 0px;
+        margin: 0;
     }
 
     .dropdown-header{
@@ -224,7 +224,7 @@
 
         > ul{
             list-style: outside none none;
-            padding: 0px 5px;
+            padding: 0 5px;
             > li{
                 display: inline-block;
                 text-align: left;
@@ -289,7 +289,7 @@
     .no-notification{
         color: $dark-gray;
         font-size: 1.2em;
-        padding: 30px 30px;
+        padding: 30px;
         text-align: center;
     }
 
@@ -355,7 +355,7 @@
     max-height: 310px;
     overflow-y: scroll;
     list-style: outside none none;
-    padding: 0px;
+    padding: 0;
 }
 .dropdown-sharing{
 
@@ -365,7 +365,7 @@
 
         .social-line{
             line-height: 28px;
-            padding: 10px 20px 5px 20px;
+            padding: 10px 20px 5px;
 
             [class*="icon-"]{
                 font-size: 20px;

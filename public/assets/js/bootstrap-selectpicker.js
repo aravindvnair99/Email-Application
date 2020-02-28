@@ -1448,10 +1448,10 @@
 
        this.$button.on('click.dropdown.data-api', function () {
          that.$menuInner.find('.active').removeClass('active');
-         if (!!that.$searchbox.val()) {
+         if (that.$searchbox.val()) {
            that.$searchbox.val('');
            that.$lis.not('.is-hidden').removeClass('hidden');
-           if (!!$no_results.parent().length) $no_results.remove();
+           if ($no_results.parent().length) $no_results.remove();
          }
          if (!that.multiple) that.$menuInner.find('.selected').addClass('active');
          setTimeout(function () {

@@ -3,7 +3,7 @@
         list-style: none;
         background: none;
         margin: 0;
-        padding: 0 0 20px 0;
+        padding: 0 0 20px;
         margin-top: 10px;
 
         > li {
@@ -103,7 +103,7 @@
                 position: absolute;
                 top: 15px;
                 left: -16px;
-                height: 0px;
+                height: 0;
                 border: 8px solid $card-background-blue;
                 border-left-color: transparent;
                 border-bottom-color: transparent;
@@ -145,8 +145,8 @@
                 display: inline-block;
                 bottom: 19px;
                 right: 48px;
-                width: 0px;
-                height: 0px;
+                width: 0;
+                height: 0;
                 border: 8px solid $card-background-brown;
                 border-right-color: transparent;
                 border-top-color: transparent;
@@ -164,11 +164,11 @@
     .msg {
         background: white;
         min-width: 50px;
-        padding: 10px 10px 0px 10px;
+        padding: 10px 10px 0;
         border-radius: 2px;
 
         p {
-            margin: 0 0 0.2rem 0;
+            margin: 0 0 0.2rem;
             //color: $dark-gray;
             font-size: 15px;
             line-height: 1.2em;
