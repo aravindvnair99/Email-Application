@@ -52,14 +52,20 @@
 					firebase.auth().signOut();
 				} else {
 					if (
-						(document.getElementsByName("email")[0].value.length < 11) || (document.getElementsByName("email")[0].value.slice(-10) !== "@email.com")
+						document.getElementsByName("email")[0].value.length <
+							11 ||
+						document
+							.getElementsByName("email")[0]
+							.value.slice(-10) !== "@email.com"
 					) {
 						main.showSwal("emailInvalid");
 						return;
 					}
 					var patt = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
 					if (
-						!patt.test(document.getElementsByName("password")[0].value)
+						!patt.test(
+							document.getElementsByName("password")[0].value
+						)
 					) {
 						main.showSwal("wrongPattern");
 						return;
@@ -199,7 +205,9 @@
 									<div class="card card-plain">
 										<div class="content">
 											<div class="form-group">
+												<label for="email">Email</label>
 												<input
+													id="email"
 													type="email"
 													placeholder="username@email.com"
 													class="form-control"
@@ -209,7 +217,11 @@
 												/>
 											</div>
 											<div class="form-group">
+												<label for="password"
+													>Password</label
+												>
 												<input
+													id="password"
 													type="password"
 													placeholder="Password"
 													class="form-control"
@@ -219,7 +231,11 @@
 												/>
 											</div>
 											<div class="form-group">
+												<label for="confirmPassword"
+													>Confirm Password</label
+												>
 												<input
+													id="confirmPassword"
 													type="password"
 													placeholder="Password Confirmation"
 													class="form-control"
@@ -240,7 +256,8 @@
 											</button>
 											<div class="forgot">
 												<a href="/login"
-													>Already have an Account? SIGN IN</a
+													>Already have an Account?
+													SIGN IN</a
 												>
 											</div>
 										</div>

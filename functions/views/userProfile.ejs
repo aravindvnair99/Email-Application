@@ -57,24 +57,21 @@
 			Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
 		-->
 				<div class="logo">
-					<a
-						href="#"
-						class="simple-text logo-mini"
-					>
+					<a href="#" class="simple-text logo-mini">
 						CT
 					</a>
 
-					<a
-						href="#"
-						class="simple-text logo-normal"
-					>
+					<a href="#" class="simple-text logo-normal">
 						Quick Access Bar
 					</a>
 				</div>
 				<div class="sidebar-wrapper">
 					<div class="user">
 						<div class="photo">
-							<img alt="profile picture" src="../../assets/img/faces/face-2.jpg" />
+							<img
+								alt="profile picture"
+								src="../../assets/img/faces/face-2.jpg"
+							/>
 						</div>
 						<div class="info">
 							<a
@@ -120,9 +117,11 @@
 						</div>
 					</div>
 					<ul class="nav">
-						 <li>
+						<li>
 							<a href="/dashboard">
-								<button class="btn btn-success btn-fill btn-wd">Inbox</button>
+								<button class="btn btn-success btn-fill btn-wd">
+									Inbox
+								</button>
 							</a>
 							<!-- <div class="collapse" id="dashboardOverview">
 								<ul class="nav">
@@ -144,10 +143,8 @@
 									</li>
 								</ul>
 							</div> -->
-						</li> 
+						</li>
 					</ul>
-					
-
 				</div>
 			</div>
 
@@ -182,7 +179,9 @@
 									<span class="input-group-addon"
 										><i class="fa fa-search"></i
 									></span>
+									<label for="search">Search</label>
 									<input
+										id="search"
 										type="text"
 										value=""
 										class="form-control"
@@ -193,7 +192,10 @@
 							<ul class="nav navbar-nav navbar-right">
 								<li>
 									<a href="/signOut">
-										<button type="button" class="btn btn-wd btn-success">
+										<button
+											type="button"
+											class="btn btn-wd btn-success"
+										>
 											Logout
 										</button>
 									</a>
@@ -383,7 +385,8 @@
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label for="profilePicture"
+														<label
+															for="profilePicture"
 															>Profile
 															Picture</label
 														>
@@ -447,7 +450,9 @@
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label for="lastName">Last Name</label>
+														<label for="lastName"
+															>Last Name</label
+														>
 														<input
 															type="text"
 															class="form-control border-input"
@@ -500,7 +505,9 @@
 											<div class="row">
 												<div class="col-md-4">
 													<div class="form-group">
-														<label for="city">City</label>
+														<label for="city"
+															>City</label
+														>
 														<input
 															id="city"
 															type="text"
@@ -514,7 +521,9 @@
 												</div>
 												<div class="col-md-4">
 													<div class="form-group">
-														<label for="country">Country</label>
+														<label for="country"
+															>Country</label
+														>
 														<input
 															id="country"
 															type="text"
@@ -546,7 +555,9 @@
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
-														<label for="bio">About Me</label>
+														<label for="bio"
+															>About Me</label
+														>
 														<input
 															id="bio"
 															type="text"
@@ -604,9 +615,7 @@
 								document.write(new Date().getFullYear());
 							</script>
 							, made with <i class="fa fa-heart heart"></i> by
-							<a href="#"
-								>Email Application Team</a
-							>
+							<a href="#">Email Application Team</a>
 						</div>
 					</div>
 				</footer>

@@ -53,24 +53,21 @@
 				data-active-color="warning"
 			>
 				<div class="logo">
-					<a
-						href="#"
-						class="simple-text logo-mini"
-					>
+					<a href="#" class="simple-text logo-mini">
 						CT
 					</a>
 
-					<a
-						href="#"
-						class="simple-text logo-normal"
-					>
+					<a href="#" class="simple-text logo-normal">
 						Quick Access Bar
 					</a>
 				</div>
 				<div class="sidebar-wrapper">
 					<div class="user">
 						<div class="photo">
-							<img alt="profile picture" src="../../assets/img/faces/face-2.jpg" />
+							<img
+								alt="profile picture"
+								src="../../assets/img/faces/face-2.jpg"
+							/>
 						</div>
 						<div class="info">
 							<a
@@ -180,7 +177,9 @@
 									<span class="input-group-addon"
 										><i class="fa fa-search"></i
 									></span>
+									<label for="search"></label>
 									<input
+										id="search"
 										type="text"
 										value=""
 										class="form-control"
@@ -191,7 +190,10 @@
 							<ul class="nav navbar-nav navbar-right">
 								<li>
 									<a href="/signOut">
-										<button type="button" class="btn btn-wd btn-success">
+										<button
+											type="button"
+											class="btn btn-wd btn-success"
+										>
 											Logout
 										</button>
 									</a>
@@ -294,7 +296,9 @@
 													<tr>
 														<th>Sender's Name</th>
 														<th>Designation</th>
-														<th>Sender's Location</th>
+														<th>
+															Sender's Location
+														</th>
 														<th>Age</th>
 														<th>Date Received</th>
 														<th
@@ -338,7 +342,9 @@
 																	class="ti-pencil-alt"
 																></i
 															></a>
-															<label for="delete">delete</label>
+															<label for="delete"
+																>delete</label
+															>
 															<input
 																id="delete"
 																type="checkbox"
@@ -1158,9 +1164,7 @@
 								document.write(new Date().getFullYear());
 							</script>
 							, made with <i class="fa fa-heart heart"></i> by
-							<a href="#"
-								>Email Application Team</a
-							>
+							<a href="#">Email Application Team</a>
 						</div>
 					</div>
 				</footer>
