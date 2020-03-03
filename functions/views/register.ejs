@@ -51,17 +51,19 @@
 				if (firebase.auth().currentUser) {
 					firebase.auth().signOut();
 				} else {
+					var patt = /^([a-z]|[A-Z])([a-z]|[A-Z]|[0-9])*(@email.com)$/;
 					if (
 						document.getElementsByName("email")[0].value.length <
 							11 ||
 						document
 							.getElementsByName("email")[0]
-							.value.slice(-10) !== "@email.com"
+							.value.slice(-10) !== "@email.com" ||
+						!patt.test(document.getElementsByName("email")[0].value)
 					) {
 						main.showSwal("emailInvalid");
 						return;
 					}
-					var patt = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+					patt = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
 					if (
 						!patt.test(
 							document.getElementsByName("password")[0].value
@@ -102,15 +104,12 @@
 					if (user) {
 						user.getIdToken()
 							.then((idToken) => {
-								alert(idToken);
 								window.location.href =
 									"/sessionRegister?idToken=" + idToken;
 							})
 							.catch((error) => {
 								alert(error);
 							});
-					} else {
-						main.showSwal("loginContinue");
 					}
 				});
 			}
