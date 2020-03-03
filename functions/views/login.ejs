@@ -1,18 +1,3 @@
-<!--
-
-  =========================================================
-  * Paper Dashboard PRO - V1.3.1
-  =========================================================
-
-  * Product Page: https://www.creative-tim.com/product/paper-dashboard-pro
-  * Available with purchase of license from https://www.creative-tim.com/product/paper-dashboard-pro
-  * Copyright 2017 Creative Tim (https://www.creative-tim.com)
-  * License Creative Tim (https://www.creative-tim.com/license)
-
-  =========================================================
-
--->
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -67,11 +52,11 @@
 					firebase.auth().signOut();
 				} else {
 					if (document.getElementById("email").value.length < 11) {
-						main.showSwal('emailValid');
+						main.showSwal("emailValid");
 						return;
 					}
 					if (document.getElementById("password").value.length < 8) {
-						main.showSwal('passwordMatch');
+						main.showSwal("passwordMatch");
 						return;
 					}
 					firebase
@@ -92,21 +77,23 @@
 				}
 			}
 			function initApp() {
-                firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+				firebase
+					.auth()
+					.setPersistence(firebase.auth.Auth.Persistence.NONE);
 				firebase.auth().onAuthStateChanged((user) => {
 					if (user) {
 						console.log(user);
 						user.getIdToken()
 							.then((idToken) => {
-                                alert(idToken)
 								window.location.href =
 									"/sessionLogin?idToken=" + idToken;
+								main.showSwal("signingIn");
 							})
 							.catch((error) => {
 								alert(error);
 							});
 					} else {
-						main.showSwal('loginContinue');
+						main.showSwal("loginContinue");
 					}
 				});
 			}
@@ -129,15 +116,15 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/login"
-						>Email Application</a
-					>
+					<a class="navbar-brand" href="/login">Email Application</a>
 				</div>
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li>
 							<a href="/register">
-								<button class="btn btn-info btn-fill btn-wd">Register</button>
+								<button class="btn btn-info btn-fill btn-wd">
+									Register
+								</button>
 							</a>
 						</li>
 					</ul>
@@ -169,7 +156,9 @@
 										</div>
 										<div class="card-content">
 											<div class="form-group">
-												<label for="email">Email address</label>
+												<label for="email"
+													>Email address</label
+												>
 												<input
 													type="email"
 													name="email"
@@ -179,7 +168,9 @@
 												/>
 											</div>
 											<div class="form-group">
-												<label for="password">Password</label>
+												<label for="password"
+													>Password</label
+												>
 												<input
 													type="password"
 													name="password"
