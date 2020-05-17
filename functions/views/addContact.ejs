@@ -15,7 +15,7 @@
 		/>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-		<title>Update Profile | Email Application</title>
+		<title>Add Contact | Email Application</title>
 
 		<meta
 			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
@@ -82,7 +82,7 @@
 						<div class="info">
 							<a>
 								<span>
-									<%- user.email -%>	
+									Chet Faker
 								</span>
 							</a>
 							<div class="clearfix"></div>
@@ -133,116 +133,23 @@
 								<span class="icon-bar bar3"></span>
 							</button>
 							<a class="navbar-brand" href="#userpage"
-								>User Page</a
+								>Add contact</a
 							>
-						</div>
-						<div class="collapse navbar-collapse">
-							<form
-								class="navbar-form navbar-left navbar-search-form"
-								role="search"
-							>
-								<div class="input-group">
-									<span class="input-group-addon"
-										><i class="fa fa-search"></i
-									></span>
-									<label for="search">Search</label>
-									<input
-										id="search"
-										type="text"
-										value=""
-										class="form-control"
-										placeholder="Search..."
-									/>
-								</div>
-							</form>
-							<ul class="nav navbar-nav navbar-right">
-
-								<li class="dropdown">
-									<a
-										href="#notifications"
-										class="dropdown-toggle btn-rotate"
-										data-toggle="dropdown"
-									>
-										<i class="ti-bell"></i>
-										<span class="notification">5</span>
-										<p class="hidden-md hidden-lg">
-											Notifications
-											<b class="caret"></b>
-										</p>
-									</a>
-									<ul class="dropdown-menu">
-										<li>
-											<a href="#not1">Notification 1</a>
-										</li>
-										<li>
-											<a href="#not2">Notification 2</a>
-										</li>
-										<li>
-											<a href="#not3">Notification 3</a>
-										</li>
-										<li>
-											<a href="#not4">Notification 4</a>
-										</li>
-										<li>
-											<a href="#another"
-												>Another notification</a
-											>
-										</li>
-									</ul>
-								</li>
-								<!-- <li>
-									<a href="#settings" class="btn-rotate">
-										<i class="ti-settings"></i>
-										<p class="hidden-md hidden-lg">
-											Settings
-										</p>
-									</a>
-								</li> -->
-							</ul>
 						</div>
 					</div>
 				</nav>
-
 				<div class="content">
 					<div class="container-fluid">
 						<div class="row">
-							<div class="col-lg-4 col-md-5">
-								<div class="card card-user">
-									<div class="image">
-										<img
-											src="../../assets/img/background.jpg"
-											alt="..."
-										/>
-									</div>
-									<div class="card-content">
-										<div class="author">
-											<img
-												class="avatar border-white"
-												src="../../assets/img/faces/face-2.jpg"
-												alt="..."
-											/>
-											<h4 class="card-title">
-												<%- user.email -%><br />
-												<!-- <a href="#"><small>@chetfaker</small></a> -->
-											</h4>
-										</div>
-										<p class="description text-center">
-											"I like the way you work it <br />
-											No diggity <br />
-											I wanna bag it up"
-										</p>
-									</div>
-								</div>
-							</div>
 							<div class="col-lg-8 col-md-7">
 								<div class="card">
 									<div class="card-header">
-										<h4 class="card-title">Edit Profile</h4>
+										<h4 class="card-title">Add Information</h4>
 									</div>
 									<div class="card-content">
 										<form
 											method="POST"
-											action="/onUpdateProfile"
+											action="/onAddContact"
 										>
 											<div class="row">
 												<div class="col-md-6">
@@ -262,17 +169,15 @@
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label for="profilePicture"
-															>Profile
-															Picture</label
+														<label for="emailAddress"
+															>Email Address</label
 														>
 														<input
-															id="profilePicture"
-															type="file"
-															name="profilePicture"
-															autocomplete="photo"
+															id="emailAddress"
+															type="tel"
+															name="emailAddress"
 															class="form-control border-input"
-															disabled
+															autocomplete="tel-country-code"
 														/>
 													</div>
 												</div>
@@ -338,105 +243,12 @@
 													</div>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-md-12">
-													<div class="form-group">
-														<label for="address1"
-															>Address Line
-															1</label
-														>
-														<input
-															id="address1"
-															type="text"
-															class="form-control border-input"
-															name="address1"
-															placeholder="Address Line 1"
-															autocomplete="address-line1"
-														/>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-12">
-													<div class="form-group">
-														<label for="address2"
-															>Address Line
-															2</label
-														>
-														<input
-															id="address2"
-															type="text"
-															class="form-control border-input"
-															name="address2"
-															placeholder="Address Line 2"
-															autocomplete="address-line2"
-														/>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-4">
-													<div class="form-group">
-														<label for="city">City</label>
-														<input
-															id="city"
-															type="text"
-															class="form-control border-input"
-															name="city"
-															placeholder="City"
-															autocomplete="address-level2"
-														/>
-													</div>
-												</div>
-												<div class="col-md-4">
-													<div class="form-group">
-														<label for="country">Country</label>
-														<input
-															id="country"
-															type="text"
-															name="country"
-															class="form-control border-input"
-															placeholder="Country"
-															autocomplete="country-name"
-														/>
-													</div>
-												</div>
-												<div class="col-md-4">
-													<div class="form-group">
-														<label for="postalCode"
-															>Postal Code</label
-														>
-														<input
-															id="postalCode"
-															type="text"
-															name="postalCode"
-															class="form-control border-input"
-															placeholder="Postal Code"
-															autocomplete="postal-code"
-														/>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-12">
-													<div class="form-group">
-														<label for="bio">About Me</label>
-														<input
-															id="bio"
-															type="text"
-															class="form-control border-input"
-															placeholder="Here can be your description"
-															name="bio"
-														/>
-													</div>
-												</div>
-											</div>
 											<div class="text-center">
 												<button
 													type="submit"
 													class="btn btn-info btn-fill btn-wd"
 												>
-													Update Profile
+													Add Contact
 												</button>
 											</div>
 											<div class="clearfix"></div>
