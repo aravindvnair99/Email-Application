@@ -144,13 +144,20 @@
 							<div class="col-lg-8 col-md-7">
 								<div class="card">
 									<div class="card-header">
-										<h4 class="card-title">Add Information</h4>
+										<h4 class="card-title">
+											Add Information
+										</h4>
 									</div>
 									<div class="card-content">
 										<form
 											method="POST"
 											action="/onEditContact"
 										>
+											<input
+												type="text"
+												name="contactID"
+												value="<%- contactID -%>"
+											/>
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
@@ -163,23 +170,25 @@
 															type="date"
 															name="DOB"
 															class="form-control border-input"
-                                                            autocomplete="bday"
-                                                            value="<%- contactProfile.DOB -%>"
+															autocomplete="bday"
+															value="<%- userProfile.DOB -%>"
 														/>
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label for="emailAddress"
-															>Email Address</label
+														<label
+															for="emailAddress"
+															>Email
+															Address</label
 														>
 														<input
 															id="emailAddress"
-															type="tel"
+															type="email"
 															name="emailAddress"
 															class="form-control border-input"
-                                                            autocomplete="tel-country-code"
-                                                            value="<%- contactProfile.emailAddress -%>"
+															autocomplete="email"
+															value="<%- userProfile.emailAddress -%>"
 														/>
 													</div>
 												</div>
@@ -195,8 +204,8 @@
 															type="tel"
 															name="countryCode"
 															class="form-control border-input"
-                                                            autocomplete="tel-country-code"
-                                                            value="<%- contactProfile.countryCode -%>"
+															autocomplete="tel-country-code"
+															value="<%- userProfile.countryCode -%>"
 														/>
 													</div>
 												</div>
@@ -211,8 +220,8 @@
 															type="tel"
 															name="mobile"
 															class="form-control border-input"
-                                                            autocomplete="tel-national"
-                                                            value="<%- contactProfile.mobile -%>"
+															autocomplete="tel-national"
+															value="<%- userProfile.mobile -%>"
 														/>
 													</div>
 												</div>
@@ -229,22 +238,24 @@
 															class="form-control border-input"
 															placeholder="First Name"
 															name="firstName"
-                                                            autocomplete="given-name"
-                                                            value="<%- contactProfile.firstName -%>"
+															autocomplete="given-name"
+															value="<%- userProfile.firstName -%>"
 														/>
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label for="lastName">Last Name</label>
+														<label for="lastName"
+															>Last Name</label
+														>
 														<input
 															id="lastName"
 															type="text"
 															class="form-control border-input"
 															placeholder="Last Name"
 															name="lastName"
-                                                            autocomplete="family-name"
-                                                            value="<%- contactProfile.lastName -%>"
+															autocomplete="family-name"
+															value="<%- userProfile.lastName -%>"
 														/>
 													</div>
 												</div>

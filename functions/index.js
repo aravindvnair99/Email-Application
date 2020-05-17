@@ -328,20 +328,23 @@ app.post("/userQuery", checkCookieMiddleware, checkValidUser, (req, res) => {
 ===============================================>>>>>*/
 
 app.get("/contacts", checkCookieMiddleware, checkValidUser, (req, res) => {
+	var i = 0,
+		contactData = new Array(),
+		contactID = new Array();
 	db.collection("users")
 		.doc(req.decodedClaims.uid)
 		.collection("contacts")
 		.get()
 		.then((querySnapshot) => {
-			ob = querySnapshot;
 			querySnapshot.forEach((childSnapshot) => {
-				contact[i] = childSnapshot.id;
+				contactID[i] = childSnapshot.id;
+				contactData[i] = childSnapshot.data();
 				i++;
 			});
-			contacts = Object.assign({}, contact);
+			contactsData = Object.assign({}, contactData);
+			contactsID = Object.assign({}, contactID);
 			user = Object.assign({}, req.decodedClaims);
-			console.log(user);
-			return res.render("contacts", { user, contacts });
+			return res.render("contacts", { user, contactsData, contactsID });
 		})
 		.catch((err) => {
 			console.log("Error getting contacts", err);
@@ -350,9 +353,6 @@ app.get("/contacts", checkCookieMiddleware, checkValidUser, (req, res) => {
 });
 app.get("/addContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 	res.render("addContact");
-});
-app.get("/editContact", checkCookieMiddleware, checkValidUser, (req, res) => {
-	res.render("editContact");
 });
 app.post("/onAddContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 	db.collection("users")
@@ -366,6 +366,63 @@ app.post("/onAddContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 			emailAddress: req.body.emailAddress,
 			countryCode: req.body.countryCode,
 			mobile: req.body.mobile,
+		});
+	return res.redirect("/dashboard");
+});
+app.get("/editContact", checkCookieMiddleware, checkValidUser, (req, res) => {
+	db.collection("users")
+		.doc(req.decodedClaims.uid)
+		.collection("contacts")
+		.doc(req.query.ID)
+		.get()
+		.then((doc) => {
+			if (!doc.exists) {
+				console.log("No such document!");
+				return res.redirect("/login");
+			} else {
+				user = Object.assign({}, req.decodedClaims);
+				userProfile = Object.assign({}, doc.data());
+				return res.render("editContact", {
+					contactID: req.query.ID,
+					userProfile,
+					user,
+				});
+			}
+		})
+		.catch((err) => {
+			console.log("Error getting document", err);
+			res.redirect("/login");
+		});
+});
+app.post(
+	"/onEditContact",
+	checkCookieMiddleware,
+	checkValidUser,
+	(req, res) => {
+		db.collection("users")
+			.doc(req.decodedClaims.uid)
+			.collection("contacts")
+			.doc(req.body.contactID)
+			.update({
+				firstName: req.body.firstName,
+				lastName: req.body.lastName,
+				DOB: req.body.DOB,
+				emailAddress: req.body.emailAddress,
+				countryCode: req.body.countryCode,
+				mobile: req.body.mobile,
+			});
+		return res.redirect("/contacts");
+	}
+);
+app.get("/deleteContact", checkCookieMiddleware, checkValidUser, (req, res) => {
+	db.collection("users")
+		.doc(req.decodedClaims.uid)
+		.collection("contacts")
+		.doc(req.query.ID)
+		.delete()
+		.catch((err) => {
+			console.log("Error getting document", err);
+			res.redirect("/login");
 		});
 	return res.redirect("/contacts");
 });
