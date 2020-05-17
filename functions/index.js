@@ -143,9 +143,9 @@ app.get("/lock", (req, res) => {
 	res.render("lock");
 });
 app.get("/dashboard", checkCookieMiddleware, checkValidUser, (req, res) => {
-	obj = Object.assign({}, req.decodedClaims);
+	user = Object.assign({}, req.decodedClaims);
 	console.log("\n\n\n\n", req.decodedClaims);
-	res.render("dashboard", { obj });
+	res.render("dashboard", { user });
 });
 app.get("/contacts", checkCookieMiddleware, checkValidUser, (req, res) => {
 	res.render("contacts");
@@ -268,6 +268,7 @@ app.get("/updateProfile", checkCookieMiddleware, (req, res) => {
 	} else {
 		user = Object.assign({}, req.decodedClaims);
 		res.render("updateProfile", { user });
+		user = Object.assign({}, req.decodedClaims);
 	}
 });
 app.post("/onUpdateProfile", checkCookieMiddleware, (req, res) => {
