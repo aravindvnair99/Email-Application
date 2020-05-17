@@ -302,23 +302,15 @@ app.post("/onUpdateProfile", checkCookieMiddleware, (req, res) => {
 			console.log("Error updating user:", error);
 		});
 });
-app.post("/userQuery", checkCookieMiddleware, checkValidUser, (req, res) => {
-	db.collection("users")
-		.doc(req.body.queryID)
-		.get()
-		.then((doc) => {
-			if (!doc.exists) {
-				console.log("User doesn't exist");
-				return res.send("User doesn't exist");
-			} else {
-				userProfile = Object.assign({}, doc.data());
-				console.log(userProfile);
-				return res.send("User is", { userProfile });
-			}
+app.post("/userQuery", (req, res) => {
+	admin
+		.auth()
+		.getUserByEmail(req.body.receiverEmail)
+		.then(() => {
+			return res.send("User exists");
 		})
-		.catch((err) => {
-			console.log("Error getting document", err);
-			res.redirect("/login");
+		.catch(function (error) {
+			return res.send("User doesn't exist");
 		});
 });
 
@@ -412,7 +404,7 @@ app.post(
 				countryCode: req.body.countryCode,
 				mobile: req.body.mobile,
 			});
-		return res.redirect("/contacts");
+		return res.redirect("/dashboard");
 	}
 );
 app.get("/deleteContact", checkCookieMiddleware, checkValidUser, (req, res) => {
@@ -425,7 +417,7 @@ app.get("/deleteContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 			console.log("Error getting document", err);
 			res.redirect("/login");
 		});
-	return res.redirect("/contacts");
+	return res.redirect("/dashboard");
 });
 
 /*=============================================>>>>>
@@ -434,7 +426,10 @@ app.get("/deleteContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 
 ===============================================>>>>>*/
 
-app.get("/sendEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
+app.get("/composeEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
+	res.render("composeEmail");
+});
+app.post("/sendEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 	db.collection("users")
 		.doc(req.body.senderID)
 		.get()
