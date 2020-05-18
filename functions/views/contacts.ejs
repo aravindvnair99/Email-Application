@@ -39,11 +39,11 @@
 		-->
 			<div class="logo">
 				<a href="https://www.creative-tim.com" class="simple-text logo-mini">
-					CT
+					EA
 				</a>
 
 				<a href="https://www.creative-tim.com" class="simple-text logo-normal">
-					Creative Tim
+					Email Application
 				</a>
 			</div>
 	    	<div class="sidebar-wrapper">
@@ -54,7 +54,7 @@
 	                <div class="info">
 						<a data-toggle="collapse" href="#collapseExample" class="collapsed">
 	                        <span>
-								Chet Faker
+								<%- user.name -%>
 		                        <b class="caret"></b>
 							</span>
 	                    </a>
@@ -63,21 +63,19 @@
 	                    <div class="collapse" id="collapseExample">
 	                        <ul class="nav">
 	                            <li>
-									<a href="#profile">
-										<span class="sidebar-mini">Mp</span>
-										<span class="sidebar-normal">My Profile</span>
-									</a>
-								</li>
-	                            <li>
-									<a href="#edit">
+									<a href="/userProfile">
 										<span class="sidebar-mini">Ep</span>
-										<span class="sidebar-normal">Edit Profile</span>
+										<span class="sidebar-normal"
+											>Edit Profile</span
+										>
 									</a>
 								</li>
-	                            <li>
-									<a href="#settings">
+								<li>
+									<a href="/signOut">
 										<span class="sidebar-mini">S</span>
-										<span class="sidebar-normal">Settings</span>
+										<span class="sidebar-normal"
+											>Sign Out</span
+										>
 									</a>
 								</li>
 	                        </ul>
@@ -85,7 +83,73 @@
 	                </div>
 	            </div>
 	            <ul class="nav">
-	            
+					<li>
+						<a data-toggle="collapse" href="#contactsDashboard">
+							<i class="ti-panel"></i>
+							<p>
+								Dashboard
+								<b class="caret"></b>
+							</p>
+						</a>
+						<div class="collapse" id="contactsDashboard">
+							<ul class="nav">
+								<li>
+									<a href="/dashboard">
+										<span class="sidebar-mini">D</span>
+										<span class="sidebar-normal"
+											>Dashboard</span
+										>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a data-toggle="collapse" href="#contactsEmail">
+							<i class="ti-panel"></i>
+							<p>
+								Email
+								<b class="caret"></b>
+							</p>
+						</a>
+						<div class="collapse" id="contactsEmail">
+							<ul class="nav">
+								<li>
+									<a href="/composeEmail">
+										<span class="sidebar-mini">SE</span>
+										<span class="sidebar-normal"
+											>Send Email</span
+										>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a data-toggle="collapse" href="#contactsContacts">
+							<i class="ti-panel"></i>
+							<p>
+								Contacts
+								<b class="caret"></b>
+							</p>
+						</a>
+						<div class="collapse" id="contactsContacts">
+							<ul class="nav">
+								<li>
+									<a href="/addContact">
+										<span class="sidebar-mini">AC</span>
+										<span class="sidebar-normal">Add Contacts</span>
+									</a>
+								</li>
+								<li>
+									<a href="/contacts">
+										<span class="sidebar-mini">VC</span>
+										<span class="sidebar-normal">View contacts</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
 	            </ul>
 	    	</div>
 	    </div>

@@ -345,7 +345,8 @@ app.get("/contacts", checkCookieMiddleware, checkValidUser, (req, res) => {
 		});
 });
 app.get("/addContact", checkCookieMiddleware, checkValidUser, (req, res) => {
-	res.render("addContact");
+	user = Object.assign({}, req.decodedClaims);
+	res.render("addContact",{ user });
 });
 app.post("/onAddContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 	db.collection("users")
@@ -427,7 +428,8 @@ app.get("/deleteContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 ===============================================>>>>>*/
 
 app.get("/composeEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
-	res.render("composeEmail");
+	user = Object.assign({}, req.decodedClaims);
+	res.render("composeEmail", { user });
 });
 app.post("/sendEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 	db.collection("users")

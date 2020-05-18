@@ -1,127 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link
-			rel="apple-touch-icon"
-			sizes="76x76"
-			href="../../assets/img/apple-icon.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="96x96"
-			href="../../assets/img/favicon.png"
-		/>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-		<title>Add Contact | Email Application</title>
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png" />
+	<link rel="icon" type="image/png" sizes="96x96" href="../../assets/img/favicon.png" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-		<meta
-			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-			name="viewport"
-		/>
-		<meta name="viewport" content="width=device-width" />
+	<title>Add Contact | Email Application</title>
 
-		<!-- Bootstrap core CSS     -->
-		<link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta name="viewport" content="width=device-width" />
 
-		<!--  Paper Dashboard core CSS    -->
-		<link href="../../assets/css/paper-dashboard.css" rel="stylesheet" />
+	<!-- Bootstrap core CSS     -->
+	<link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
 
-		<!--  CSS for main Purpose, don't include it in your project     -->
-		<link href="../../assets/css/main.css" rel="stylesheet" />
+	<!--  Paper Dashboard core CSS    -->
+	<link href="../../assets/css/paper-dashboard.css" rel="stylesheet" />
 
-		<!--  Fonts and icons     -->
-		<link
-			href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
-			rel="stylesheet"
-		/>
-		<link
-			href="https://fonts.googleapis.com/css?family=Muli:400,300"
-			rel="stylesheet"
-			type="text/css"
-		/>
-		<link href="../../assets/css/themify-icons.css" rel="stylesheet" />
-	</head>
+	<!--  CSS for main Purpose, don't include it in your project     -->
+	<link href="../../assets/css/main.css" rel="stylesheet" />
 
-	<body>
-		<div class="wrapper">
-			<div
-				class="sidebar"
-				data-background-color="brown"
-				data-active-color="danger"
-			>
-				<!--
-			Tip 1: you can change the color of the sidebar's background using: data-background-color="white | brown"
-			Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
-		-->
-				<div class="logo">
-					<a
-						href="https://www.creative-tim.com"
-						class="simple-text logo-mini"
-					>
-						CT
-					</a>
+	<!--  Fonts and icons     -->
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Muli:400,300" rel="stylesheet" type="text/css" />
+	<link href="../../assets/css/themify-icons.css" rel="stylesheet" />
+</head>
 
-					<a
-						href="https://www.creative-tim.com"
-						class="simple-text logo-normal"
-					>
-						Creative Tim
-					</a>
-				</div>
-				<div class="sidebar-wrapper">
-					<div class="user">
-						<div class="photo">
-							<img
-								alt="profile picture"
-								src="../../assets/img/faces/face-2.jpg"
-							/>
-						</div>
-						<div class="info">
-							<a>
-								<span>
-									Chet Faker
-								</span>
-							</a>
-							<div class="clearfix"></div>
+<body>
+	<div class="wrapper">
+		<div class="sidebar" data-background-color="brown" data-active-color="danger">
+			<!--
+			   Tip 1: you can change the color of the sidebar's background using: data-background-color="white | brown"
+			   Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+		      -->
+			<div class="logo">
+				<a href="https://www.creative-tim.com" class="simple-text logo-mini">
+					EA
+				</a>
 
-							<div>
-								<ul class="nav">
-									<li>
-										<a href="/signOut">
-											<span class="sidebar-mini">SO</span>
-											<span class="sidebar-normal"
-												>Sign Out</span
-											>
-										</a>
-									</li>
-									<li>
-										<a href="/lock">
-											<span class="sidebar-mini"
-												>LSP</span
-											>
-											<span class="sidebar-normal"
-												>Lock Screen Page</span
-											>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
+				<a href="https://www.creative-tim.com" class="simple-text logo-normal">
+					Email Application
+				</a>
 			</div>
+			<div class="sidebar-wrapper">
+				<div class="user">
+	                <div class="photo">
+	                    <img src="../../assets/img/faces/face-2.jpg" />
+	                </div>
+	                <div class="info">
+						<a data-toggle="collapse" href="#collapseExample" class="collapsed">
+	                        <span>
+								<%- user.name -%>
+		                        <b class="caret"></b>
+							</span>
+	                    </a>
+						<div class="clearfix"></div>
+
+	                    <div class="collapse" id="collapseExample">
+	                        <ul class="nav">
+	                            <li>
+									<a href="/userProfile">
+										<span class="sidebar-mini">Ep</span>
+										<span class="sidebar-normal"
+											>Edit Profile</span
+										>
+									</a>
+								</li>
+								<li>
+									<a href="/signOut">
+										<span class="sidebar-mini">S</span>
+										<span class="sidebar-normal"
+											>Sign Out</span
+										>
+									</a>
+								</li>
+	                        </ul>
+	                    </div>
+	                </div>
+				</div>
+				<ul class="nav">
+					<li>
+						<a data-toggle="collapse" href="#addContactsDashboard">
+							<i class="ti-panel"></i>
+							<p>
+								Dashboard
+								<b class="caret"></b>
+							</p>
+						</a>
+						<div class="collapse" id="addContactsDashboard">
+							<ul class="nav">
+								<li>
+									<a href="/dashboard">
+										<span class="sidebar-mini">D</span>
+										<span class="sidebar-normal"
+											>Dashboard</span
+										>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a data-toggle="collapse" href="#addContactsEmail">
+							<i class="ti-panel"></i>
+							<p>
+								Email
+								<b class="caret"></b>
+							</p>
+						</a>
+						<div class="collapse" id="addContactsEmail">
+							<ul class="nav">
+								<li>
+									<a href="/composeEmail">
+										<span class="sidebar-mini">SE</span>
+										<span class="sidebar-normal"
+											>Send Email</span
+										>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a data-toggle="collapse" href="#addContactsContact">
+							<i class="ti-panel"></i>
+							<p>
+								Contacts
+								<b class="caret"></b>
+							</p>
+						</a>
+						<div class="collapse" id="addContactsContact">
+							<ul class="nav">
+								<li>
+									<a href="/addContact">
+										<span class="sidebar-mini">SC</span>
+										<span class="sidebar-normal"
+											>Add Contact</span
+										>
+									</a>
+								</li>
+								<li>
+									<a href="/contacts">
+										<span class="sidebar-mini">VC</span>
+										<span class="sidebar-normal"
+											>View Contacts</span
+										>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+	            
+	            </ul>
+			</div>
+		</div>
 
 			<div class="main-panel">
 				<nav class="navbar navbar-default">
 					<div class="container-fluid">
 						<div class="navbar-minimize">
-							<button
-								id="minimizeSidebar"
-								class="btn btn-fill btn-icon"
-							>
+							<button id="minimizeSidebar" class="btn btn-fill btn-icon">
 								<i class="ti-more-alt"></i>
 							</button>
 						</div>
@@ -132,9 +171,7 @@
 								<span class="icon-bar bar2"></span>
 								<span class="icon-bar bar3"></span>
 							</button>
-							<a class="navbar-brand" href="#userpage"
-								>Add contact</a
-							>
+							<a class="navbar-brand" href="#userpage">Add contact</a>
 						</div>
 					</div>
 				</nav>
@@ -147,107 +184,63 @@
 										<h4 class="card-title">Add Information</h4>
 									</div>
 									<div class="card-content">
-										<form
-											method="POST"
-											action="/onAddContact"
-										>
+										<form method="POST" action="/onAddContact">
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label for="DOB"
-															>Date of
-															Birth</label
-														>
-														<input
-															id="DOB"
-															type="date"
-															name="DOB"
-															class="form-control border-input"
-															autocomplete="bday"
-														/>
+														<label for="DOB">Date of
+															Birth</label>
+														<input id="DOB" type="date" name="DOB"
+															class="form-control border-input" autocomplete="bday" />
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label for="emailAddress"
-															>Email Address</label
-														>
-														<input
-															id="emailAddress"
-															type="email"
-															name="emailAddress"
-															class="form-control border-input"
-															autocomplete="email"
-														/>
+														<label for="emailAddress">Email Address</label>
+														<input id="emailAddress" type="email" name="emailAddress"
+															class="form-control border-input" autocomplete="email" />
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label for="countryCode"
-															>Country Code</label
-														>
-														<input
-															id="countryCode"
-															type="tel"
-															name="countryCode"
+														<label for="countryCode">Country Code</label>
+														<input id="countryCode" type="tel" name="countryCode"
 															class="form-control border-input"
-															autocomplete="tel-country-code"
-														/>
+															autocomplete="tel-country-code" />
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label for="mobile"
-															>Mobile
-															number</label
-														>
-														<input
-															id="mobile"
-															type="tel"
-															name="mobile"
+														<label for="mobile">Mobile
+															number</label>
+														<input id="mobile" type="tel" name="mobile"
 															class="form-control border-input"
-															autocomplete="tel-national"
-														/>
+															autocomplete="tel-national" />
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label for="firstName"
-															>First Name</label
-														>
-														<input
-															id="firstName"
-															type="text"
-															class="form-control border-input"
-															placeholder="First Name"
-															name="firstName"
-															autocomplete="given-name"
-														/>
+														<label for="firstName">First Name</label>
+														<input id="firstName" type="text"
+															class="form-control border-input" placeholder="First Name"
+															name="firstName" autocomplete="given-name" />
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label for="lastName">Last Name</label>
-														<input
-															id="lastName"
-															type="text"
-															class="form-control border-input"
-															placeholder="Last Name"
-															name="lastName"
-															autocomplete="family-name"
-														/>
+														<input id="lastName" type="text"
+															class="form-control border-input" placeholder="Last Name"
+															name="lastName" autocomplete="family-name" />
 													</div>
 												</div>
 											</div>
 											<div class="text-center">
-												<button
-													type="submit"
-													class="btn btn-info btn-fill btn-wd"
-												>
+												<button type="submit" class="btn btn-info btn-fill btn-wd">
 													Add Contact
 												</button>
 											</div>
@@ -275,9 +268,7 @@
 									</a>
 								</li>
 								<li>
-									<a
-										href="https://www.creative-tim.com/license"
-									>
+									<a href="https://www.creative-tim.com/license">
 										Licenses
 									</a>
 								</li>
@@ -289,82 +280,72 @@
 								document.write(new Date().getFullYear());
 							</script>
 							, made with <i class="fa fa-heart heart"></i> by
-							<a href="https://www.creative-tim.com"
-								>Creative Tim</a
-							>
+							<a href="https://www.creative-tim.com">Creative Tim</a>
 						</div>
 					</div>
 				</footer>
 			</div>
 		</div>
-	</body>
+</body>
 
-	<!--   Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js   -->
-	<script src="../../assets/js/jquery.min.js" type="text/javascript"></script>
-	<script
-		src="../../assets/js/jquery-ui.min.js"
-		type="text/javascript"
-	></script>
-	<script
-		src="../../assets/js/perfect-scrollbar.min.js"
-		type="text/javascript"
-	></script>
-	<script
-		src="../../assets/js/bootstrap.min.js"
-		type="text/javascript"
-	></script>
+<!--   Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js   -->
+<script src="../../assets/js/jquery.min.js" type="text/javascript"></script>
+<script src="../../assets/js/jquery-ui.min.js" type="text/javascript"></script>
+<script src="../../assets/js/perfect-scrollbar.min.js" type="text/javascript"></script>
+<script src="../../assets/js/bootstrap.min.js" type="text/javascript"></script>
 
-	<!--  Forms Validations Plugin -->
-	<script src="../../assets/js/jquery.validate.min.js"></script>
+<!--  Forms Validations Plugin -->
+<script src="../../assets/js/jquery.validate.min.js"></script>
 
-	<!-- Promise Library for SweetAlert2 working on IE -->
-	<script src="../../assets/js/es6-promise-auto.min.js"></script>
+<!-- Promise Library for SweetAlert2 working on IE -->
+<script src="../../assets/js/es6-promise-auto.min.js"></script>
 
-	<!--  Plugin for Date Time Picker and Full Calendar Plugin-->
-	<script src="../../assets/js/moment.min.js"></script>
+<!--  Plugin for Date Time Picker and Full Calendar Plugin-->
+<script src="../../assets/js/moment.min.js"></script>
 
-	<!--  Date Time Picker Plugin is included in this js file -->
-	<script src="../../assets/js/bootstrap-datetimepicker.js"></script>
+<!--  Date Time Picker Plugin is included in this js file -->
+<script src="../../assets/js/bootstrap-datetimepicker.js"></script>
 
-	<!--  Select Picker Plugin -->
-	<script src="../../assets/js/bootstrap-selectpicker.js"></script>
+<!--  Select Picker Plugin -->
+<script src="../../assets/js/bootstrap-selectpicker.js"></script>
 
-	<!--  Switch and Tags Input Plugins -->
-	<script src="../../assets/js/bootstrap-switch-tags.js"></script>
+<!--  Switch and Tags Input Plugins -->
+<script src="../../assets/js/bootstrap-switch-tags.js"></script>
 
-	<!-- Circle Percentage-chart -->
-	<script src="../../assets/js/jquery.easypiechart.min.js"></script>
+<!-- Circle Percentage-chart -->
+<script src="../../assets/js/jquery.easypiechart.min.js"></script>
 
-	<!--  Charts Plugin -->
-	<script src="../../assets/js/chartist.min.js"></script>
+<!--  Charts Plugin -->
+<script src="../../assets/js/chartist.min.js"></script>
 
-	<!--  Notifications Plugin    -->
-	<script src="../../assets/js/bootstrap-notify.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../../assets/js/bootstrap-notify.js"></script>
 
-	<!-- Sweet Alert 2 plugin -->
-	<script src="../../assets/js/sweetalert2.js"></script>
+<!-- Sweet Alert 2 plugin -->
+<script src="../../assets/js/sweetalert2.js"></script>
 
-	<!-- Vector Map plugin -->
-	<script src="../../assets/js/jquery-jvectormap.js"></script>
+<!-- Vector Map plugin -->
+<script src="../../assets/js/jquery-jvectormap.js"></script>
 
-	<!--  Google Maps Plugin    -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 
-	<!-- Wizard Plugin    -->
-	<script src="../../assets/js/jquery.bootstrap.wizard.min.js"></script>
+<!-- Wizard Plugin    -->
+<script src="../../assets/js/jquery.bootstrap.wizard.min.js"></script>
 
-	<!--  Bootstrap Table Plugin    -->
-	<script src="../../assets/js/bootstrap-table.js"></script>
+<!--  Bootstrap Table Plugin    -->
+<script src="../../assets/js/bootstrap-table.js"></script>
 
-	<!--  Plugin for DataTables.net  -->
-	<script src="../../assets/js/jquery.datatables.js"></script>
+<!--  Plugin for DataTables.net  -->
+<script src="../../assets/js/jquery.datatables.js"></script>
 
-	<!--  Full Calendar Plugin    -->
-	<script src="../../assets/js/fullcalendar.min.js"></script>
+<!--  Full Calendar Plugin    -->
+<script src="../../assets/js/fullcalendar.min.js"></script>
 
-	<!-- Paper Dashboard PRO Core javascript and methods for main purpose -->
-	<script src="../../assets/js/paper-dashboard.js"></script>
+<!-- Paper Dashboard PRO Core javascript and methods for main purpose -->
+<script src="../../assets/js/paper-dashboard.js"></script>
 
-	<!-- Paper Dashboard PRO main methods, don't include it in your project! -->
-	<script src="../../assets/js/main.js"></script>
+<!-- Paper Dashboard PRO main methods, don't include it in your project! -->
+<script src="../../assets/js/main.js"></script>
+
 </html>
