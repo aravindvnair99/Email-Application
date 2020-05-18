@@ -96,31 +96,31 @@
 						</div>
 					</li>
 					<li>
-						<a data-toggle="collapse" href="#dashboardOverview">
+						<a data-toggle="collapse" href="#emailEmails">
 							<i class="ti-panel"></i>
 							<p>
-								Inboxes
+								Email
 								<b class="caret"></b>
 							</p>
 						</a>
-						<div class="collapse" id="dashboardOverview">
+						<div class="collapse" id="emailEmails">
 							<ul class="nav">
 								<li>
-									<a href="/inbox">
-										<span class="sidebar-mini">I</span>
-										<span class="sidebar-normal">Main Inbox</span>
+									<a href="/composeEmail">
+										<span class="sidebar-mini">SE</span>
+										<span class="sidebar-normal">Send Email</span>
 									</a>
 								</li>
 								<li>
-									<a href="/drafts">
-										<span class="sidebar-mini">D</span>
-										<span class="sidebar-normal">Drafts</span>
+									<a href="/sentEmails">
+										<span class="sidebar-mini">SE</span>
+										<span class="sidebar-normal">Sent Emails</span>
 									</a>
 								</li>
 								<li>
-									<a href="/drafts">
-										<span class="sidebar-mini">S</span>
-										<span class="sidebar-normal">Sent</span>
+									<a href="/draftedEmails">
+										<span class="sidebar-mini">DE</span>
+										<span class="sidebar-normal">Drafted Emails</span>
 									</a>
 								</li>
 							</ul>
@@ -195,7 +195,8 @@
 						</div>
 						<div class="col-md-12">
 							<div class="card">
-								<form id="allInputsFormValidation" class="form-horizontal" method="post" name = "allInputsFormValidation">
+								<form id="allInputsFormValidation" class="form-horizontal" method="post"
+									name="allInputsFormValidation">
 									<div class="card-content">
 										<h4 class="card-title">
 											New Mail:
@@ -307,7 +308,7 @@
 		$('#submitButton').click(function () {
 			$('#allInputsFormValidation').attr('action', '/sendEmail');
 		});
-		
+
 		$("#receiverEmail").change(() => {
 			var payload = {
 				checkEmail: document.getElementById("receiverEmail").value,
