@@ -475,6 +475,7 @@ app.get("/sentEmails", checkCookieMiddleware, checkValidUser, (req, res) => {
 			emailsData = Object.assign({}, emailData);
 			emailsID = Object.assign({}, emailID);
 			user = Object.assign({}, req.decodedClaims);
+			console.log(emailsData)
 			return res.render("sentEmails", { user, emailsData, emailsID });
 		})
 		.catch((err) => {
@@ -490,7 +491,7 @@ app.post("/sendEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 	obj = {
 		subject: req.body.subject,
 		message: req.body.message,
-		timestamp: admin.firestore.FieldValue.serverTimestamp(),
+		timestamp: admin.firestore.Timestamp.now().toDate(),
 		to: req.body.receiverEmail,
 		from: req.decodedClaims.email,
 	};

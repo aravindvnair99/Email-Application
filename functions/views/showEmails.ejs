@@ -5,7 +5,7 @@
 			<%= emailsData[i].from %>
 		</td>
 		<td><%= emailsData[i].subject %></td>
-		<td><%= emailsData[i].timestamp %></td>
+		<td><%= emailsData[i].timestamp.toDate() %></td>
 		<td>
 			<a
 				href="/readEmail?ID=<%= emailsID[i] %>"
