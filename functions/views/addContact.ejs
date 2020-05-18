@@ -238,6 +238,7 @@
 									</div>
 									<div class="card-content">
 										<form
+										id="allInputsFormValidation"
 											method="POST"
 											action="/onAddContact"
 										>
@@ -461,4 +462,42 @@
 
 	<!-- Paper Dashboard PRO main methods, don't include it in your project! -->
 	<script src="../../assets/js/main.js"></script>
+	<script>
+		$().ready(function () {
+			$("#registerFormValidation").validate();
+			$("#loginFormValidation").validate();
+			$("#allInputsFormValidation").validate();
+		});
+		$("#emailAddress").change(function () {
+			var payload = {
+				emailAddress: document.getElementById("emailAddress")
+					.value,
+			};
+			console.log(payload);
+			fetch("/userQuery", {
+				method: "POST",
+				body: new URLSearchParams($.param(payload)),
+			})
+				.then(function (response) {
+					if (response.status !== 200) {
+						alert(
+							"Looks like there was a problem. Status Code: " +
+								response.status
+						);
+						return;
+					}
+					response.text().then(function (data) {
+						if (data != "User exists")
+							alert(
+								"User does not exist! Please recheck email."
+							);
+					});
+				})
+				document.getElementById("emailAddress").value = ""
+				.catch(function (err) {
+					alert("Fetch Error :-S", err);
+				});
+
+		});
+	</script>
 </html>
