@@ -369,7 +369,7 @@ app.get("/contacts", checkCookieMiddleware, checkValidUser, (req, res) => {
 			res.redirect("/login");
 		});
 });
-app.get("/addContact", checkCookieMiddleware, (req, res) => {
+app.get("/addContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 	user = Object.assign({}, req.decodedClaims);
 	res.render("addContact", {
 		user,
