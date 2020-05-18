@@ -500,7 +500,7 @@ app.post("/sendEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 		.doc()
 		.set(obj)
 		.then(() => {
-			db.collection("users")
+			return db.collection("users")
 				.doc(req.decodedClaims.uid)
 				.collection("sentEmails")
 				.doc()
@@ -519,11 +519,10 @@ app.post("/sendEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 		});
 });
 
-
-app.get("/deleteEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
+app.get("/deleteInboxEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 	db.collection("users")
 		.doc(req.decodedClaims.uid)
-		.collection("receivdEmails")
+		.collection("receivedEmails")
 		.doc(req.query.ID)
 		.delete()
 		.catch((err) => {
@@ -532,7 +531,30 @@ app.get("/deleteEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 		});
 	return res.redirect("/dashboard");
 });
-
+app.get("/deleteSentEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
+	db.collection("users")
+		.doc(req.decodedClaims.uid)
+		.collection("sentEmails")
+		.doc(req.query.ID)
+		.delete()
+		.catch((err) => {
+			console.log("Error getting document", err);
+			res.redirect("/login");
+		});
+	return res.redirect("/dashboard");
+});
+app.get("/deleteDraftEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
+	db.collection("users")
+		.doc(req.decodedClaims.uid)
+		.collection("draftEmails")
+		.doc(req.query.ID)
+		.delete()
+		.catch((err) => {
+			console.log("Error getting document", err);
+			res.redirect("/login");
+		});
+	return res.redirect("/dashboard");
+});
 
 /*=============================================>>>>>
 
