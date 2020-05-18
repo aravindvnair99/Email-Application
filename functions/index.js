@@ -305,14 +305,33 @@ app.post("/onUpdateProfile", checkCookieMiddleware, (req, res) => {
 app.post("/userQuery", (req, res) => {
 	admin
 		.auth()
-		.getUserByEmail(req.body.receiverEmail)
+		.getUserByEmail(req.body.checkEmail)
 		.then(() => {
 			return res.send("User exists");
 		})
-		.catch(function (error) {
+		.catch((error) => {
+			console.log(error);
 			return res.send("User doesn't exist");
 		});
 });
+app.post(
+	"/userDataQuery",
+	checkCookieMiddleware,
+	checkValidUser,
+	(req, res) => {
+		admin
+			.auth()
+			.getUserByEmail(req.body.checkEmail)
+			.then((userRecord) => {
+				console.log("\n\n\n", userRecord);
+				return res.send(userRecord);
+			})
+			.catch((error) => {
+				console.log(error);
+				return res.send("User doesn't exist");
+			});
+	}
+);
 
 /*=============================================>>>>>
 
@@ -344,9 +363,9 @@ app.get("/contacts", checkCookieMiddleware, checkValidUser, (req, res) => {
 			res.redirect("/login");
 		});
 });
-app.get("/addContact", checkCookieMiddleware, checkValidUser, (req, res) => {
+app.get("/addContact", checkCookieMiddleware, (req, res) => {
 	user = Object.assign({}, req.decodedClaims);
-	res.render("addContact",{ user });
+	res.render("addContact", { user });
 });
 app.post("/onAddContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 	db.collection("users")

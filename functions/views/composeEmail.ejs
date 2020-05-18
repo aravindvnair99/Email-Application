@@ -379,23 +379,21 @@
 		<!-- Paper Dashboard PRO main methods, don't include it in your project! -->
 		<script src="/assets/js/main.js"></script>
 
-		<script type="text/javascript">
-			$().ready(function () {
+		<script>
+			$().ready(() => {
 				$("#registerFormValidation").validate();
 				$("#loginFormValidation").validate();
 				$("#allInputsFormValidation").validate();
 			});
-			$("#receiverEmail").change(function () {
+			$("#emailAddress").change(() => {
 				var payload = {
-					receiverEmail: document.getElementById("receiverEmail")
-						.value,
+					checkEmail: document.getElementById("receiverEmail").value,
 				};
-				console.log(payload);
 				fetch("/userQuery", {
 					method: "POST",
 					body: new URLSearchParams($.param(payload)),
 				})
-					.then(function (response) {
+					.then((response) => {
 						if (response.status !== 200) {
 							alert(
 								"Looks like there was a problem. Status Code: " +
@@ -403,14 +401,17 @@
 							);
 							return;
 						}
-						response.text().then(function (data) {
-							if (data != "User exists")
+						response.text().then((data) => {
+							if (data != "User exists") {
+								document.getElementById("receiverEmail").value =
+									"";
 								alert(
 									"User does not exist! Please recheck email."
 								);
+							}
 						});
 					})
-					.catch(function (err) {
+					.catch((err) => {
 						alert("Fetch Error :-S", err);
 					});
 			});

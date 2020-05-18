@@ -384,4 +384,38 @@
 
 	<!-- Paper Dashboard PRO main methods, don't include it in your project! -->
 	<script src="../../assets/js/main.js"></script>
+	<script>
+		$().ready(() => {
+			$("#registerFormValidation").validate();
+			$("#loginFormValidation").validate();
+			$("#allInputsFormValidation").validate();
+		});
+		$("#emailAddress").change(() => {
+			var payload = {
+				checkEmail: document.getElementById("emailAddress").value,
+			};
+			fetch("/userQuery", {
+				method: "POST",
+				body: new URLSearchParams($.param(payload)),
+			})
+				.then((response) => {
+					if (response.status !== 200) {
+						alert(
+							"Looks like there was a problem. Status Code: " +
+								response.status
+						);
+						return;
+					}
+					response.text().then((data) => {
+						if (data != "User exists") {
+							document.getElementById("emailAddress").value = "";
+							alert("User does not exist! Please recheck email.");
+						}
+					});
+				})
+				.catch((err) => {
+					alert("Fetch Error :-S", err);
+				});
+		});
+	</script>
 </html>
