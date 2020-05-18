@@ -494,6 +494,7 @@ app.post("/sendEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 		timestamp: admin.firestore.Timestamp.now().toDate(),
 		to: req.body.receiverEmail,
 		from: req.decodedClaims.email,
+		status: 'unread'
 	};
 	db.collection("users")
 		.doc(req.body.receiverUID)
