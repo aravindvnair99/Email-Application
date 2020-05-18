@@ -245,7 +245,7 @@
 									<form
 										id="allInputsFormValidation"
 										class="form-horizontal"
-										action="/sendEmail"
+										action=""
 										method="post"
 									>
 										<div class="card-content">
@@ -317,8 +317,18 @@
 												<button
 													type="submit"
 													class="btn btn-fill btn-info"
+													id = "submitButton"
+													onclick="submit()"
 												>
 													Send
+												</button>
+												<button
+													type="submit"
+													class="btn btn-fill btn-info"
+													id = "draftButton"
+													onclick="draft()"
+												>
+													Save to Draft
 												</button>
 											</div>
 										</div>
@@ -435,6 +445,12 @@
 						alert("Fetch Error :-S", err);
 					});
 			});
+			function submit(){
+				document.getElementById("allInputsFormValidation").action = "/sendEmail"
+			}
+			function draft(){
+				document.getElementById("allInputsFormValidation").action = "/draftEmail"
+			}
 		</script>
 	</body>
 </html>
