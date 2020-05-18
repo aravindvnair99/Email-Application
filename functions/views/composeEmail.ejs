@@ -247,7 +247,6 @@
 										class="form-horizontal"
 										action="/sendEmail"
 										method="post"
-										novalidate=""
 									>
 										<div class="card-content">
 											<h4 class="card-title">
@@ -258,14 +257,22 @@
 													<label
 														class="col-sm-2 control-label"
 													>
-														TO:
+														To:
 													</label>
 													<div class="col-sm-6">
 														<input
 															class="form-control"
 															type="text"
 															name="receiverEmail"
+															placeholder="Enter email address"
 															id="receiverEmail"
+															required
+														/>
+														<input
+															type="text"
+															name="receiverUID"
+															id="receiverUID"
+															hidden
 														/>
 													</div>
 												</div>
@@ -275,7 +282,7 @@
 													<label
 														class="col-sm-2 control-label"
 													>
-														SUBJECT:
+														Subject:
 													</label>
 													<div class="col-sm-6">
 														<input
@@ -283,22 +290,25 @@
 															type="text"
 															name="subject"
 															id="subject"
-															required="required"
+															placeholder="Enter subject here"
+															required
 														/>
 													</div>
-													<!-- <div class="col-sm-4"><code>required</code></div> -->
 												</div>
 											</fieldset>
 											<fieldset>
 												<div class="form-group">
 													<label
 														class="col-sm-2 control-label"
-													></label>
+														>Message:</label
+													>
 													<div class="col-sm-10">
 														<textarea
 															class="form-control"
 															placeholder="Enter Your Content Here"
 															rows="15"
+															required
+															name="message"
 														></textarea>
 													</div>
 												</div>
@@ -385,11 +395,11 @@
 				$("#loginFormValidation").validate();
 				$("#allInputsFormValidation").validate();
 			});
-			$("#emailAddress").change(() => {
+			$("#receiverEmail").change(() => {
 				var payload = {
 					checkEmail: document.getElementById("receiverEmail").value,
 				};
-				fetch("/userQuery", {
+				fetch("/userIDQuery", {
 					method: "POST",
 					body: new URLSearchParams($.param(payload)),
 				})
@@ -402,7 +412,17 @@
 							return;
 						}
 						response.text().then((data) => {
-							if (data != "User exists") {
+							if (data.length == 28 || data.length == 36) {
+								document.getElementById(
+									"receiverUID"
+								).value = data;
+							} else if ((data = "User doesn't exist")) {
+								document.getElementById("receiverEmail").value =
+									"";
+								alert(
+									"User does not exist! Please recheck email."
+								);
+							} else {
 								document.getElementById("receiverEmail").value =
 									"";
 								alert(

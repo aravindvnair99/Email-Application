@@ -314,24 +314,18 @@ app.post("/userQuery", (req, res) => {
 			return res.send("User doesn't exist");
 		});
 });
-app.post(
-	"/userDataQuery",
-	checkCookieMiddleware,
-	checkValidUser,
-	(req, res) => {
-		admin
-			.auth()
-			.getUserByEmail(req.body.checkEmail)
-			.then((userRecord) => {
-				console.log("\n\n\n", userRecord);
-				return res.send(userRecord);
-			})
-			.catch((error) => {
-				console.log(error);
-				return res.send("User doesn't exist");
-			});
-	}
-);
+app.post("/userIDQuery", checkCookieMiddleware, checkValidUser, (req, res) => {
+	admin
+		.auth()
+		.getUserByEmail(req.body.checkEmail)
+		.then((userRecord) => {
+			return res.send(userRecord.uid);
+		})
+		.catch((error) => {
+			console.log(error);
+			return res.send("User doesn't exist");
+		});
+});
 
 /*=============================================>>>>>
 
@@ -446,27 +440,44 @@ app.get("/deleteContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 
 ===============================================>>>>>*/
 
+app.get("/emails", checkCookieMiddleware, checkValidUser, (req, res) => {
+	user = Object.assign({}, req.decodedClaims);
+	console.log("\n\n\n\n", req.decodedClaims);
+	res.render("dashboard", { user });
+});
 app.get("/composeEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 	user = Object.assign({}, req.decodedClaims);
 	res.render("composeEmail", { user });
 });
 app.post("/sendEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
+	obj = {
+		subject: req.body.subject,
+		message: req.body.message,
+		timestamp: admin.firestore.FieldValue.serverTimestamp(),
+		to: req.body.receiverEmail,
+		from: req.decodedClaims.email,
+	};
 	db.collection("users")
-		.doc(req.body.senderID)
-		.get()
-		.then((doc) => {
-			if (!doc.exists) {
-				console.log("No such document!");
-				return res.redirect("/login");
-			} else {
-				user = Object.assign({}, req.decodedClaims);
-				userProfile = Object.assign({}, doc.data());
-				console.log(user);
-				return res.render("userProfile", { userProfile, user });
-			}
+		.doc(req.body.receiverUID)
+		.collection("receivedEmails")
+		.doc()
+		.set(obj)
+		.then(() => {
+			db.collection("users")
+				.doc(req.decodedClaims.uid)
+				.collection("sentEmails")
+				.doc()
+				.set(obj)
+				.then(() => {
+					return res.redirect("/dashboard");
+				})
+				.catch((err) => {
+					console.log("Error ", err);
+					res.redirect("/login");
+				});
 		})
 		.catch((err) => {
-			console.log("Error getting document", err);
+			console.log("Error ", err);
 			res.redirect("/login");
 		});
 });
