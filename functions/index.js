@@ -149,12 +149,6 @@ app.get("/offline", (req, res) => {
 app.get("/lock", (req, res) => {
 	res.render("lock");
 });
-app.get("/dashboard", checkCookieMiddleware, checkValidUser, (req, res) => {
-	user = Object.assign({}, req.decodedClaims);
-	console.log("\n\n\n\n", req.decodedClaims);
-	res.render("dashboard", { user });
-});
-
 /*=============================================>>>>>
 
 			= Authentication =
@@ -440,10 +434,53 @@ app.get("/deleteContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 
 ===============================================>>>>>*/
 
-app.get("/emails", checkCookieMiddleware, checkValidUser, (req, res) => {
-	user = Object.assign({}, req.decodedClaims);
-	console.log("\n\n\n\n", req.decodedClaims);
-	res.render("dashboard", { user });
+app.get("/dashboard", checkCookieMiddleware, checkValidUser, (req, res) => {
+	var i = 0,
+		emailData = new Array(),
+		emailID = new Array();
+	db.collection("users")
+		.doc(req.decodedClaims.uid)
+		.collection("receivedEmails")
+		.get()
+		.then((querySnapshot) => {
+			querySnapshot.forEach((childSnapshot) => {
+				emailID[i] = childSnapshot.id;
+				emailData[i] = childSnapshot.data();
+				i++;
+			});
+			emailsData = Object.assign({}, emailData);
+			emailsID = Object.assign({}, emailID);
+			user = Object.assign({}, req.decodedClaims);
+			return res.render("dashboard", { user, emailsData, emailsID });
+		})
+		.catch((err) => {
+			console.log("Error getting contacts", err);
+			res.redirect("/login");
+		});
+});
+app.get("/sentEmails", checkCookieMiddleware, checkValidUser, (req, res) => {
+	var i = 0,
+		emailData = new Array(),
+		emailID = new Array();
+	db.collection("users")
+		.doc(req.decodedClaims.uid)
+		.collection("sentEmails")
+		.get()
+		.then((querySnapshot) => {
+			querySnapshot.forEach((childSnapshot) => {
+				emailID[i] = childSnapshot.id;
+				emailData[i] = childSnapshot.data();
+				i++;
+			});
+			emailsData = Object.assign({}, emailData);
+			emailsID = Object.assign({}, emailID);
+			user = Object.assign({}, req.decodedClaims);
+			return res.render("sentEmails", { user, emailsData, emailsID });
+		})
+		.catch((err) => {
+			console.log("Error getting contacts", err);
+			res.redirect("/login");
+		});
 });
 app.get("/composeEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 	user = Object.assign({}, req.decodedClaims);
