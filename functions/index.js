@@ -471,6 +471,21 @@ app.post("/sendEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 		});
 });
 
+
+app.get("/deleteEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
+	db.collection("users")
+		.doc(req.decodedClaims.uid)
+		.collection("receivdEmails")
+		.doc(req.query.ID)
+		.delete()
+		.catch((err) => {
+			console.log("Error getting document", err);
+			res.redirect("/login");
+		});
+	return res.redirect("/dashboard");
+});
+
+
 /*=============================================>>>>>
 
 				= errors =
