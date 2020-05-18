@@ -482,12 +482,37 @@ app.get("/inbox", checkCookieMiddleware, checkValidUser, (req, res) => {
 			res.redirect("/login");
 		});
 });
+app.get("/readEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
+	db.collection("users")
+		.doc(req.decodedClaims.uid)
+		.collection("receivedEmails")
+		.doc(req.query.ID)
+		.get()
+		.then((doc) => {
+			if (!doc.exists) {
+				console.log("No such document!");
+				return res.redirect("/login");
+			} else {
+				user = Object.assign({}, req.decodedClaims);
+				emailData = Object.assign({}, doc.data());
+				return res.render("readEmail", {
+					emailID: req.query.ID,
+					emailData,
+					user,
+				});
+			}
+		})
+		.catch((err) => {
+			console.log("Error getting document", err);
+			res.redirect("/login");
+		});
+});
 app.post("/markAsRead", checkCookieMiddleware, checkValidUser, (req, res) => {
 	db.collection("users")
 		.doc(req.decodedClaims.uid)
 		.collection("receivedEmails")
 		.doc(req.body.emailID)
-		.update({ status: read })
+		.update({ status: 'read' })
 		.then(() => {
 			return res.send("Marked as read!");
 		})
@@ -501,7 +526,7 @@ app.post("/markAsUnread", checkCookieMiddleware, checkValidUser, (req, res) => {
 		.doc(req.decodedClaims.uid)
 		.collection("receivedEmails")
 		.doc(req.body.emailID)
-		.update({ status: unread })
+		.update({ status: 'unread' })
 		.then(() => {
 			return res.send("Marked as unread!");
 		})
