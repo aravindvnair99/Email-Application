@@ -46,6 +46,7 @@ function checkCookieMiddleware(req, res, next) {
 			res.redirect("/login");
 		});
 }
+
 function checkValidUser(req, res, next) {
 	if (req.decodedClaims.phone_number && req.decodedClaims.email_verified) {
 		next();
@@ -54,11 +55,14 @@ function checkValidUser(req, res, next) {
 		res.redirect("/updateProfile");
 	}
 }
+
 function setCookieLogin(idToken, res) {
 	const expiresIn = 60 * 60 * 24 * 5 * 1000;
 	admin
 		.auth()
-		.createSessionCookie(idToken, { expiresIn })
+		.createSessionCookie(idToken, {
+			expiresIn
+		})
 		.then(
 			(sessionCookie) => {
 				const options = {
@@ -95,11 +99,14 @@ function setCookieLogin(idToken, res) {
 			console.log(error);
 		});
 }
+
 function setCookieRegister(idToken, res) {
 	const expiresIn = 60 * 60 * 24 * 5 * 1000;
 	admin
 		.auth()
-		.createSessionCookie(idToken, { expiresIn })
+		.createSessionCookie(idToken, {
+			expiresIn
+		})
 		.then(
 			(sessionCookie) => {
 				const options = {
@@ -195,7 +202,9 @@ app.post("/passwordReset", (req, res) => {
 			.getUserByEmail(req.body.email)
 			.then((userRecord) => {
 				userRecord = Object.assign({}, userRecord);
-				return res.render("passwordReset", { userRecord });
+				return res.render("passwordReset", {
+					userRecord
+				});
 			})
 			.catch((error) => {
 				console.log("Error fetching user data:", error);
@@ -224,7 +233,10 @@ app.get("/userProfile", checkCookieMiddleware, checkValidUser, (req, res) => {
 				user = Object.assign({}, req.decodedClaims);
 				userProfile = Object.assign({}, doc.data());
 				console.log(user);
-				return res.render("userProfile", { userProfile, user });
+				return res.render("userProfile", {
+					userProfile,
+					user
+				});
 			}
 		})
 		.catch((err) => {
@@ -267,7 +279,9 @@ app.get("/updateProfile", checkCookieMiddleware, (req, res) => {
 		res.redirect("/dashboard");
 	} else {
 		user = Object.assign({}, req.decodedClaims);
-		res.render("updateProfile", { user });
+		res.render("updateProfile", {
+			user
+		});
 		user = Object.assign({}, req.decodedClaims);
 	}
 });
@@ -344,7 +358,11 @@ app.get("/contacts", checkCookieMiddleware, checkValidUser, (req, res) => {
 			contactsData = Object.assign({}, contactData);
 			contactsID = Object.assign({}, contactID);
 			user = Object.assign({}, req.decodedClaims);
-			return res.render("contacts", { user, contactsData, contactsID });
+			return res.render("contacts", {
+				user,
+				contactsData,
+				contactsID
+			});
 		})
 		.catch((err) => {
 			console.log("Error getting contacts", err);
@@ -353,7 +371,9 @@ app.get("/contacts", checkCookieMiddleware, checkValidUser, (req, res) => {
 });
 app.get("/addContact", checkCookieMiddleware, (req, res) => {
 	user = Object.assign({}, req.decodedClaims);
-	res.render("addContact", { user });
+	res.render("addContact", {
+		user
+	});
 });
 app.post("/onAddContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 	db.collection("users")
@@ -451,7 +471,11 @@ app.get("/dashboard", checkCookieMiddleware, checkValidUser, (req, res) => {
 			emailsData = Object.assign({}, emailData);
 			emailsID = Object.assign({}, emailID);
 			user = Object.assign({}, req.decodedClaims);
-			return res.render("dashboard", { user, emailsData, emailsID });
+			return res.render("dashboard", {
+				user,
+				emailsData,
+				emailsID
+			});
 		})
 		.catch((err) => {
 			console.log("Error getting contacts", err);
@@ -476,7 +500,11 @@ app.get("/sentEmails", checkCookieMiddleware, checkValidUser, (req, res) => {
 			emailsID = Object.assign({}, emailID);
 			user = Object.assign({}, req.decodedClaims);
 			console.log(emailsData)
-			return res.render("sentEmails", { user, emailsData, emailsID });
+			return res.render("sentEmails", {
+				user,
+				emailsData,
+				emailsID
+			});
 		})
 		.catch((err) => {
 			console.log("Error getting contacts", err);
@@ -485,7 +513,9 @@ app.get("/sentEmails", checkCookieMiddleware, checkValidUser, (req, res) => {
 });
 app.get("/composeEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 	user = Object.assign({}, req.decodedClaims);
-	res.render("composeEmail", { user });
+	res.render("composeEmail", {
+		user
+	});
 });
 app.post("/sendEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 	obj = {
@@ -516,6 +546,58 @@ app.post("/sendEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 		})
 		.catch((err) => {
 			console.log("Error ", err);
+			res.redirect("/login");
+		});
+});
+
+app.post("/draftEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
+	console.log("Entered Draft email");
+	obj = {
+		subject: req.body.subject,
+		message: req.body.message,
+		timestamp: admin.firestore.Timestamp.now().toDate(),
+		to: req.body.receiverEmail,
+		from: req.decodedClaims.email,
+	};
+	db.collection("users")
+		.doc(req.decodedClaims.uid)
+		.collection("draftedEmails")
+		.doc()
+		.set(obj).then(() => {
+			return res.redirect("/draftedEmails");
+		})
+		.catch((err) => {
+			console.log("Error ", err);
+			res.redirect("/login");
+		});
+});
+
+app.get("/draftedEmails", checkCookieMiddleware, checkValidUser, (req, res) => {
+	var i = 0,
+		emailData = new Array(),
+		emailID = new Array();
+	db.collection("users")
+		.doc(req.decodedClaims.uid)
+		.collection("draftedEmails")
+		.get()
+		.then((querySnapshot) => {
+			querySnapshot.forEach((childSnapshot) => {
+				emailID[i] = childSnapshot.id;
+				emailData[i] = childSnapshot.data();
+				i++;
+			});
+			emailsData = Object.assign({}, emailData);
+			emailsID = Object.assign({}, emailID);
+			user = Object.assign({}, req.decodedClaims);
+			console.log(emailsData)
+			return res.render("sentEmails", {
+				user,
+				emailsData,
+				emailsID
+			});
+		})
+		.catch((err) => {
+			console.log("Error getting contacts", err);
 			res.redirect("/login");
 		});
 });
