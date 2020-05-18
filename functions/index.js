@@ -80,7 +80,7 @@ function setCookieLogin(idToken, res) {
 							decodedClaims.phone_number &&
 							decodedClaims.email_verified
 						) {
-							return res.redirect("/dashboard");
+							return res.redirect("/inbox");
 						} else {
 							return res.redirect("/updateProfile");
 						}
@@ -145,7 +145,7 @@ function setCookieRegister(idToken, res) {
 
 app.get("/", (req, res) => {
 	if (req.cookies.__session) {
-		res.redirect("/dashboard");
+		res.redirect("/inbox");
 	} else {
 		res.render("login");
 	}
@@ -164,7 +164,7 @@ app.get("/lock", (req, res) => {
 
 app.get("/login", (req, res) => {
 	if (req.cookies.__session) {
-		res.redirect("/dashboard");
+		res.redirect("/inbox");
 	} else {
 		res.render("login");
 	}
@@ -174,7 +174,7 @@ app.get("/sessionLogin", (req, res) => {
 });
 app.get("/register", (req, res) => {
 	if (req.cookies.__session) {
-		res.redirect("/dashboard");
+		res.redirect("/inbox");
 	} else {
 		res.render("register");
 	}
@@ -188,14 +188,14 @@ app.get("/signOut", (req, res) => {
 });
 app.get("/forgotPassword", (req, res) => {
 	if (req.cookies.__session) {
-		res.redirect("/dashboard");
+		res.redirect("/inbox");
 	} else {
 		res.render("forgotPassword");
 	}
 });
 app.post("/passwordReset", (req, res) => {
 	if (req.cookies.__session) {
-		res.redirect("/dashboard");
+		res.redirect("/inbox");
 	} else {
 		admin
 			.auth()
@@ -276,7 +276,7 @@ app.post(
 );
 app.get("/updateProfile", checkCookieMiddleware, (req, res) => {
 	if (req.decodedClaims.phone_number && req.decodedClaims.email_verified) {
-		res.redirect("/dashboard");
+		res.redirect("/inbox");
 	} else {
 		user = Object.assign({}, req.decodedClaims);
 		res.render("updateProfile", {
@@ -388,7 +388,7 @@ app.post("/onAddContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 			countryCode: req.body.countryCode,
 			mobile: req.body.mobile,
 		});
-	return res.redirect("/dashboard");
+	return res.redirect("/inbox");
 });
 app.get("/editContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 	db.collection("users")
@@ -432,7 +432,7 @@ app.post(
 				countryCode: req.body.countryCode,
 				mobile: req.body.mobile,
 			});
-		return res.redirect("/dashboard");
+		return res.redirect("/inbox");
 	}
 );
 app.get("/deleteContact", checkCookieMiddleware, checkValidUser, (req, res) => {
@@ -445,7 +445,7 @@ app.get("/deleteContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 			console.log("Error getting document", err);
 			res.redirect("/login");
 		});
-	return res.redirect("/dashboard");
+	return res.redirect("/inbox");
 });
 
 /*=============================================>>>>>
@@ -454,7 +454,7 @@ app.get("/deleteContact", checkCookieMiddleware, checkValidUser, (req, res) => {
 
 ===============================================>>>>>*/
 
-app.get("/dashboard", checkCookieMiddleware, checkValidUser, (req, res) => {
+app.get("/inbox", checkCookieMiddleware, checkValidUser, (req, res) => {
 	var i = 0,
 		emailData = new Array(),
 		emailID = new Array();
@@ -471,7 +471,7 @@ app.get("/dashboard", checkCookieMiddleware, checkValidUser, (req, res) => {
 			emailsData = Object.assign({}, emailData);
 			emailsID = Object.assign({}, emailID);
 			user = Object.assign({}, req.decodedClaims);
-			return res.render("dashboard", {
+			return res.render("inbox", {
 				user,
 				emailsData,
 				emailsID
@@ -538,7 +538,7 @@ app.post("/sendEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 				.doc()
 				.set(obj)
 				.then(() => {
-					return res.redirect("/dashboard");
+					return res.redirect("/inbox");
 				})
 				.catch((err) => {
 					console.log("Error ", err);
@@ -613,7 +613,7 @@ app.get("/deleteInboxEmail", checkCookieMiddleware, checkValidUser, (req, res) =
 			console.log("Error getting document", err);
 			res.redirect("/login");
 		});
-	return res.redirect("/dashboard");
+	return res.redirect("/inbox");
 });
 app.get("/deleteSentEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 	db.collection("users")
@@ -625,7 +625,7 @@ app.get("/deleteSentEmail", checkCookieMiddleware, checkValidUser, (req, res) =>
 			console.log("Error getting document", err);
 			res.redirect("/login");
 		});
-	return res.redirect("/dashboard");
+	return res.redirect("/inbox");
 });
 app.get("/deleteDraftEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 	db.collection("users")
@@ -637,7 +637,7 @@ app.get("/deleteDraftEmail", checkCookieMiddleware, checkValidUser, (req, res) =
 			console.log("Error getting document", err);
 			res.redirect("/login");
 		});
-	return res.redirect("/dashboard");
+	return res.redirect("/inbox");
 });
 
 /*=============================================>>>>>
