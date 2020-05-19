@@ -10,14 +10,13 @@
 			<a
 				href="/readEmail?ID=<%= emailsID[i] %>"
 				class="btn btn-simple btn-warning btn-icon edit"
-				><b><i class="ti-pencil-alt"></i></b
+				><i class="ti-email"></i
 			></a>
-			<b
-				><a
-					href="/deleteInboxEmail?ID=<%= emailsID[i] %>"
-					class="btn btn-simple btn-warning btn-icon edit"
-					><i class="ti-close"></i></a
-			></b>
+			<a
+				href="/deleteInboxEmail?ID=<%= emailsID[i] %>"
+				class="btn btn-simple btn-warning btn-icon edit"
+				><i class="ti-trash"></i
+			></a>
 		</td>
 	</tr>
 	<% }%> <% if (emailsData[i].status == 'read') {%>
@@ -31,12 +30,12 @@
 			<a
 				href="/readEmail?ID=<%= emailsID[i] %>"
 				class="btn btn-simple btn-warning btn-icon edit"
-				><i class="ti-pencil-alt"></i
+				><i class="ti-email"></i
 			></a>
 			<a
 				href="/deleteInboxEmail?ID=<%= emailsID[i] %>"
 				class="btn btn-simple btn-warning btn-icon edit"
-				><i class="ti-close"></i
+				><i class="ti-trash"></i
 			></a>
 		</td>
 	</tr>
