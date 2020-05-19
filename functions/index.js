@@ -43,7 +43,7 @@ function checkCookieMiddleware(req, res, next) {
 		})
 		.catch((error) => {
 			console.log(error);
-			res.redirect("/login");
+			res.redirect("/signOut");
 		});
 }
 
