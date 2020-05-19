@@ -320,102 +320,43 @@
 						</div>
 						<!-- end row -->
 					</div>
-
-					<footer class="footer">
-						<div class="container-fluid">
-							<nav class="pull-left">
-								<ul>
-									<li>
-										<a href="https://www.creative-tim.com">
-											Creative Tim
-										</a>
-									</li>
-									<li>
-										<a href="https://blog.creative-tim.com">
-											Blog
-										</a>
-									</li>
-									<li>
-										<a
-											href="https://www.creative-tim.com/license"
-										>
-											Licenses
-										</a>
-									</li>
-								</ul>
-							</nav>
-							<div class="copyright pull-right">
-								&copy;
-								<script>
-									document.write(new Date().getFullYear());
-								</script>
-								, made with <i class="fa fa-heart heart"></i> by
-								<a href="https://www.creative-tim.com"
-									>Creative Tim</a
-								>
-							</div>
-						</div>
-					</footer>
+					<%- include('components/footer') %>
 				</div>
 			</div>
 		</div>
-	</body>
-
-	<!--   Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js   -->
-	<script src="/assets/js/jquery.min.js" type="text/javascript"></script>
-	<script src="/assets/js/jquery-ui.min.js" type="text/javascript"></script>
-	<script
-		src="/assets/js/perfect-scrollbar.min.js"
-		type="text/javascript"
-	></script>
-	<script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!-- Promise Library for SweetAlert2 working on IE -->
-	<script src="/assets/js/es6-promise-auto.min.js"></script>
-
-	<!--  Notifications Plugin    -->
-	<script src="/assets/js/bootstrap-notify.js"></script>
-
-	<!-- Sweet Alert 2 plugin -->
-	<script src="/assets/js/sweetalert2.js"></script>
-
-	<!-- Paper Dashboard PRO Core javascript and methods for main purpose -->
-	<script src="/assets/js/paper-dashboard.js"></script>
-
-	<!-- Paper Dashboard PRO main methods, don't include it in your project! -->
-	<script src="/assets/js/main.js"></script>
-	<script>
-		$(() => {
-			setTimeout(() => {
-				var payload = {
-					emailID: document.getElementById("emailID").value,
-				};
-				fetch("/markAsRead", {
-					method: "POST",
-					body: new URLSearchParams($.param(payload)),
-				})
-					.then((response) => {
-						if (response.status !== 200) {
-							alert(
-								"Looks like there was a problem. Status Code: " +
-									response.status
-							);
-							return;
-						}
-						response.text().then((data) => {
-							if (data != "Marked as read!") {
-								alert("Could not mark as read!");
-								window.location.reload();
-							}
-						});
+		<%- include('components/scripts') %>
+		<script>
+			$(() => {
+				setTimeout(() => {
+					var payload = {
+						emailID: document.getElementById("emailID").value,
+					};
+					fetch("/markAsRead", {
+						method: "POST",
+						body: new URLSearchParams($.param(payload)),
 					})
-					.catch((err) => {
-						alert("Fetch Error :-S", err);
-					});
-			}, 3000);
-		});
-		function markAsUnread() {
-			var payload = {
+						.then((response) => {
+							if (response.status !== 200) {
+								alert(
+									"Looks like there was a problem. Status Code: " +
+										response.status
+								);
+								return;
+							}
+							response.text().then((data) => {
+								if (data != "Marked as read!") {
+									alert("Could not mark as read!");
+									window.location.reload();
+								}
+							});
+						})
+						.catch((err) => {
+							alert("Fetch Error :-S", err);
+						});
+				}, 3000);
+			});
+			function markAsUnread() {
+				var payload = {
 					emailID: document.getElementById("emailID").value,
 				};
 				fetch("/markAsUnread", {
@@ -434,12 +375,13 @@
 							if (data != "Marked as unread!") {
 								alert("Could not mark as unread!");
 								window.location.reload();
-							} else window.location = '/inbox'
+							} else window.location = "/inbox";
 						});
 					})
 					.catch((err) => {
 						alert("Fetch Error :-S", err);
 					});
-		}
-	</script>
+			}
+		</script>
+	</body>
 </html>
