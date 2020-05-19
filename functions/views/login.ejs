@@ -76,6 +76,7 @@
 						});
 				}
 			}
+
 			function initApp() {
 				firebase
 					.auth()
@@ -188,6 +189,7 @@
 												type="button"
 												onclick="toggleSignIn()"
 												class="btn btn-fill btn-wd"
+												id="loginButton"
 											>
 												Login
 											</button>
@@ -208,10 +210,23 @@
 						</div>
 					</div>
 				</div>
-				<%- include('components/footer') %>
+
+				<footer class="footer footer-transparent">
+					<div class="container">
+						<div class="copyright text-center">
+							&copy;
+							<script>
+								document.write(new Date().getFullYear());
+							</script>
+							, made with <i class="fa fa-heart heart"></i> by
+							<a href="#">Email Application Team</a>
+						</div>
+					</div>
+				</footer>
 			</div>
 		</div>
 		<%- include('components/scripts') %>
+
 		<script type="text/javascript">
 			$().ready(function () {
 				main.checkFullPageBackgroundImage();
@@ -227,6 +242,20 @@
 				document.getElementById("password").onpaste = function (e) {
 					e.preventDefault();
 				};
+			});
+			var input = document.getElementById("email");
+			input.addEventListener("keyup", function (event) {
+				if (event.keyCode === 13) {
+					event.preventDefault();
+					document.getElementById("loginButton").click();
+				}
+			});
+			var input1 = document.getElementById("password");
+			input1.addEventListener("keyup", function (event) {
+				if (event.keyCode === 13) {
+					event.preventDefault();
+					document.getElementById("loginButton").click();
+				}
 			});
 		</script>
 	</body>
