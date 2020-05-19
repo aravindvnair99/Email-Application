@@ -768,7 +768,7 @@ app.post(
 						from: req.decodedClaims.email,
 					})
 					.then(() => {
-						db.collection("users")
+						return db.collection("users")
 							.doc(req.decodedClaims.uid)
 							.collection("draftedEmails")
 							.doc(req.body.draftID)
