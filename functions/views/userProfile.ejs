@@ -1,37 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
 		<title>User Profile | Email Application</title>
-
-		<meta
-			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-			name="viewport"
-		/>
-		<meta name="viewport" content="width=device-width" />
-
-		<!-- Bootstrap core CSS     -->
-		<link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
-
-		<!--  Paper Dashboard core CSS    -->
-		<link href="/assets/css/paper-dashboard.css" rel="stylesheet" />
-
-		<!--  CSS for main Purpose, don't include it in your project     -->
-		<link href="/assets/css/main.css" rel="stylesheet" />
-
-		<!--  Fonts and icons     -->
-		<link
-			href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
-			rel="stylesheet"
-		/>
-		<link
-			href="https://fonts.googleapis.com/css?family=Muli:400,300"
-			rel="stylesheet"
-			type="text/css"
-		/>
-		<link href="/assets/css/themify-icons.css" rel="stylesheet" />
+		<%- include('components/meta') %> <%- include('components/link') %>
 	</head>
 
 	<body>
@@ -336,21 +307,21 @@
 			</div>
 		</div>
 		<%- include('components/scripts') %>
-	<script>
-		document.getElementById("firstName").value = `<%- user.name -%>`.split(
-			" "
-		)[0];
-		document.getElementById("lastName").value = `<%- user.name -%>`.split(
-			" "
-		)[1];
-		document.getElementById(
-			"countryCode"
-		).value = `<%- user.phone_number -%>`.slice(0, -10);
-		document.getElementById(
-			"mobile"
-		).value = `<%- user.phone_number -%>`.slice(-10);
-		document.getElementById("DOB").min = Date.now() - 10;
-		document.getElementById("DOB").max = Date.now() - 10;
-	</script>
+		<script>
+			document.getElementById(
+				"firstName"
+			).value = `<%- user.name -%>`.split(" ")[0];
+			document.getElementById(
+				"lastName"
+			).value = `<%- user.name -%>`.split(" ")[1];
+			document.getElementById(
+				"countryCode"
+			).value = `<%- user.phone_number -%>`.slice(0, -10);
+			document.getElementById(
+				"mobile"
+			).value = `<%- user.phone_number -%>`.slice(-10);
+			document.getElementById("DOB").min = Date.now() - 10;
+			document.getElementById("DOB").max = Date.now() - 10;
+		</script>
 	</body>
 </html>
