@@ -644,7 +644,7 @@ app.post("/sendEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 					from: req.decodedClaims.email,
 				})
 				.then(() => {
-					return res.redirect("/inbox");
+					return res.redirect("/sentEmails");
 				})
 				.catch((err) => {
 					console.log("Error ", err);
@@ -740,7 +740,7 @@ app.get(
 				console.log("Error getting document", err);
 				res.redirect("/login");
 			});
-		return res.redirect("/inbox");
+		return res.redirect("/sentEmails");
 	}
 );
 app.get(
@@ -757,7 +757,7 @@ app.get(
 				console.log("Error getting document", err);
 				res.redirect("/login");
 			});
-		return res.redirect("/inbox");
+		return res.redirect("/draftedEmails");
 	}
 );
 
