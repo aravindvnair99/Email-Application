@@ -1,4 +1,26 @@
 <% for(var i=0;i<Object.keys(emailsData).length;i++) { %>
+	<% if (emailsData[i].status == 'unread') {%>
+	<tr>
+		<td>
+			<b><%= emailsData[i].from %></b>
+		</td>
+		<td><b><%= emailsData[i].subject %></b></td>
+		<td><b><%= emailsData[i].timestamp.toDate() %></b></td>
+		<td>
+			<a
+				href="/readEmail?ID=<%= emailsID[i] %>"
+				class="btn btn-simple btn-warning btn-icon edit"
+				><b><i class="ti-pencil-alt"></i></b
+			></a>
+			<b
+				><a
+					href="/deleteInboxEmail?ID=<%= emailsID[i] %>"
+					class="btn btn-simple btn-warning btn-icon edit"
+					><i class="ti-close"></i></a
+			></b>
+		</td>
+	</tr>
+	<% }%> <% if (emailsData[i].status == 'read') {%>
 	<tr>
 		<td>
 			<%= emailsData[i].from %>
@@ -18,6 +40,5 @@
 			></a>
 		</td>
 	</tr>
-
-	<% }%></Object.keys(emailsData).length;i++)
+	<% }%> <% }%></Object.keys(emailsData).length;i++)
 >
