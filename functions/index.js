@@ -153,9 +153,6 @@ app.get("/", (req, res) => {
 app.get("/offline", (req, res) => {
 	res.render("offline");
 });
-app.get("/lock", (req, res) => {
-	res.render("lock");
-});
 /*=============================================>>>>>
 
 			= Authentication =
