@@ -17,24 +17,15 @@
 			Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
 		-->
 				<div class="logo">
-					<a
-						href="https://www.creative-tim.com"
-						class="simple-text logo-mini"
-					>
+					<a href="/" class="simple-text logo-mini">
 						EA
 					</a>
-					<a
-						href="https://www.creative-tim.com"
-						class="simple-text logo-normal"
-					>
+					<a href="/" class="simple-text logo-normal">
 						Email Application
 					</a>
 				</div>
 				<div class="sidebar-wrapper">
 					<div class="user">
-						<div class="photo">
-							<img src="/assets/img/faces/face-2.jpg" />
-						</div>
 						<div class="info">
 							<a
 								data-toggle="collapse"
@@ -42,7 +33,7 @@
 								class="collapsed"
 							>
 								<span>
-									<%- user.name -%>
+									<%- user.name -%> <br> <%- user.email -%>
 									<b class="caret"></b>
 								</span>
 							</a>
