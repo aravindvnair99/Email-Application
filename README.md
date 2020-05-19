@@ -1,6 +1,6 @@
 # Email Application
 
-Code from Software Engineering Lab project at Amrita School of Engineering, Bengaluru
+Code from Software Engineering Lab project at Amrita School of Engineering, Bengaluru. Made as per use cases and requirements given by Tata Consultancy Services Limited on November 2017.
 
 # :octocat: How to contribute?
 
@@ -14,12 +14,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 # :family: Team
 
-* **Abhishek Venkata Sai Kandikattu** - *Scrum Master and Back-end Developer* - [Abhishek-Sai](https://github.com/Abhishek-Sai)
-* **Aravind V. Nair** - *Front-end and Back-end Developer* - [AravindVNair99](https://github.com/AravindVNair99)
-* **Harshita Reddy Edugudi** - *Front-end Developer* - [harshitaaaaa](https://github.com/harshitaaaaa)
-* **Aditya Deepak Udapudi** - *Front-end Developer* - [adityadu-18](https://github.com/adityadu-18)
-* **Golla Keerthana** - *Tester* - []()
-* **Abhinay Krishna Chitirala** - *Tester* - [abhinaychitirala](https://github.com/abhinaychitirala)
+-   **Abhishek Venkata Sai Kandikattu** - _Scrum Master, Front-end and Back-end Developer_ - [Abhishek-Sai](https://github.com/Abhishek-Sai)
+-   **Aravind V. Nair** - _DevOps, Security, Front-end and Back-end Developer_ - [AravindVNair99](https://github.com/AravindVNair99)
+-   **Harshita Reddy Edugudi** - _Front-end Developer_ - [harshitaaaaa](https://github.com/harshitaaaaa)
+-   **Aditya Deepak Udapudi** - _Front-end Developer_ - [adityadu-18](https://github.com/adityadu-18)
+-   **Golla Keerthana** - _Tester_ - [keerthanachowdary218](https://github.com/keerthanachowdary218)
+-   **Abhinay Krishna Chitirala** - _Tester_ - [abhinaychitirala](https://github.com/abhinaychitirala)
 
 See the full list of [contributors](https://github.com/aravindvnair99/Email-Application/graphs/contributors) who participated in this project and statistics.
 
@@ -39,11 +39,11 @@ Check the [changelog here](https://github.com/aravindvnair99/Email-Application/c
 
 Report [here](https://github.com/aravindvnair99/Email-Application/issues/new/choose) in detail answering these questions:
 
-* What steps did you take to make the bug appear?
-* How can the bug be fixed? (In case you know)
-* Which OS and which all packages/software/dependencies are you using?
-* Have you tried any troubleshooting steps such as a reboot for example?
-* Have you followed the prescribed prerequisites?
+-   What steps did you take to make the bug appear?
+-   How can the bug be fixed? (In case you know)
+-   Which OS and which all packages/software/dependencies are you using?
+-   Have you tried any troubleshooting steps such as a reboot for example?
+-   Have you followed the prescribed prerequisites?
 
 # :envelope: How do I contact the team?
 

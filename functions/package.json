@@ -1,0 +1,53 @@
+{
+	"name": "se-lab-email",
+	"version": "1.0.1",
+	"description": "SE Lab Email PWA",
+	"keywords": [
+		"PWA",
+		"services",
+		"email"
+	],
+	"man": [
+		"../README.MD"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/aravindvnair99/Email-Application.git"
+	},
+	"author": "Contributors",
+	"contributors": [
+		{
+			"name": "Aravind V Nair",
+			"url": "https://github.com/AravindVNair99"
+		}
+	],
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/aravindvnair99/Email-Application/issues"
+	},
+	"homepage": "https://se-lab-email.web.app",
+	"scripts": {
+		"lint": "eslint .",
+		"serve": "firebase serve --only functions",
+		"shell": "firebase functions:shell",
+		"start": "npm run shell",
+		"deploy": "firebase deploy --only functions",
+		"logs": "firebase functions:log"
+	},
+	"engines": {
+		"node": "8"
+	},
+	"dependencies": {
+		"cookie-parser": "^1.4.5",
+		"ejs": "^3.1.3",
+		"express": "^4.17.1",
+		"firebase-admin": "^8.12.1",
+		"firebase-functions": "^3.6.1"
+	},
+	"devDependencies": {
+		"eslint": "^6.8.0",
+		"eslint-plugin-promise": "^4.2.1",
+		"firebase-functions-test": "^0.2.1"
+	},
+	"private": true
+}
