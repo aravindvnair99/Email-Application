@@ -228,19 +228,14 @@
 						<div class="collapse navbar-collapse">
 							<form
 								class="navbar-form navbar-left navbar-search-form"
-								role="search"
 							>
-								<div class="input-group">
-									<span class="input-group-addon"
-										><i class="fa fa-search"></i
-									></span>
-									<input
-										type="text"
-										value=""
-										class="form-control"
-										placeholder="Search..."
-									/>
-								</div>
+								<button
+									type="button"
+									onclick="markAsUnread()"
+									class="btn btn-fill btn-wd"
+								>
+									Mark as unread
+								</button>
 							</form>
 							<ul class="nav navbar-nav navbar-right">
 								<li>
@@ -368,18 +363,12 @@
 
 	<!--   Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js   -->
 	<script src="/assets/js/jquery.min.js" type="text/javascript"></script>
-	<script
-		src="/assets/js/jquery-ui.min.js"
-		type="text/javascript"
-	></script>
+	<script src="/assets/js/jquery-ui.min.js" type="text/javascript"></script>
 	<script
 		src="/assets/js/perfect-scrollbar.min.js"
 		type="text/javascript"
 	></script>
-	<script
-		src="/assets/js/bootstrap.min.js"
-		type="text/javascript"
-	></script>
+	<script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!-- Promise Library for SweetAlert2 working on IE -->
 	<script src="/assets/js/es6-promise-auto.min.js"></script>
@@ -425,5 +414,32 @@
 					});
 			}, 3000);
 		});
+		function markAsUnread() {
+			var payload = {
+					emailID: document.getElementById("emailID").value,
+				};
+				fetch("/markAsUnread", {
+					method: "POST",
+					body: new URLSearchParams($.param(payload)),
+				})
+					.then((response) => {
+						if (response.status !== 200) {
+							alert(
+								"Looks like there was a problem. Status Code: " +
+									response.status
+							);
+							return;
+						}
+						response.text().then((data) => {
+							if (data != "Marked as unread!") {
+								alert("Could not mark as unread!");
+								window.location.reload();
+							} else window.location = '/inbox'
+						});
+					})
+					.catch((err) => {
+						alert("Fetch Error :-S", err);
+					});
+		}
 	</script>
 </html>
