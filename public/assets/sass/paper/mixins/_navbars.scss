@@ -17,14 +17,14 @@
     outline: 1px solid transparent;
   }
   .bar1 {
-    top: 0px;
+    top: 0;
     @include bar-animation($topbar-back);
   }
   .bar2 {
     opacity: 1;
   }
   .bar3 {
-    bottom: 0px;
+    bottom: 0;
     @include bar-animation($bottombar-back);
   }
   .toggled .bar1 {

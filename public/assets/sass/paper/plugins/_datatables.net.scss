@@ -197,7 +197,7 @@ table.dataTable{
             &:after{
                 position: relative;
                 display: inline-block;
-                bottom: 0px;
+                bottom: 0;
                 right: -7px;
                 font-family: 'FontAwesome';
                 opacity: 0.8;
@@ -301,7 +301,7 @@ table.dataTable.dtr-inline.collapsed {
             display: block;
             position: absolute;
             color: #518607;
-            border: 0px solid white;
+            border: 0 solid white;
             border-radius: 14px;
             box-shadow: 0 0 3px #444;
             box-sizing: content-box;
