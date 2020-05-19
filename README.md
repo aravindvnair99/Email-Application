@@ -1,6 +1,6 @@
-# Spot the Hole
+# Email Application
 
-Official source code of Spot the Hole PWA which was a project for Smart India Hackathon 2020 and Open Lab project at Amrita School of Engineering, Bengaluru.
+Code from Software Engineering Lab project at Amrita School of Engineering, Bengaluru. Made as per use cases and requirements given by Tata Consultancy Services Limited on November 2017.
 
 # :octocat: How to contribute?
 
@@ -14,12 +14,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 # :family: Team
 
--   **Abhinay Krishna Chitirala** - _Design, UI / UX Prototyping_ - [abhinaychitirala](https://github.com/abhinaychitirala)
--   **Abhishek Venkata Sai Kandikattu** - _Back-end and Big Data Analytics_ - [Abhishek-Sai](https://github.com/Abhishek-Sai)
--   **Aditya Deepak Udapudi** - _Front-end and Big Data Analytics_ - [adityadu-18](https://github.com/adityadu-18)
--   **Aravind V. Nair** - _Front-end, Back-end, DevOps and Security_ - [AravindVNair99](https://github.com/AravindVNair99)
--   **Harshita Reddy Edugudi** - _Design, UI / UX Prototyping, Natural Language Processing_ - [harshitaaaaa](https://github.com/harshitaaaaa)
--   **Keerthana Golla Chowdary** - _Computer Vision_ - [keerthanachowdary218](https://github.com/keerthanachowdary218)
+-   **Abhishek Venkata Sai Kandikattu** - _Scrum Master, Front-end and Back-end Developer_ - [Abhishek-Sai](https://github.com/Abhishek-Sai)
+-   **Aravind V. Nair** - _DevOps, Security, Front-end and Back-end Developer_ - [AravindVNair99](https://github.com/AravindVNair99)
+-   **Harshita Reddy Edugudi** - _Front-end Developer_ - [harshitaaaaa](https://github.com/harshitaaaaa)
+-   **Aditya Deepak Udapudi** - _Front-end Developer_ - [adityadu-18](https://github.com/adityadu-18)
+-   **Golla Keerthana** - _Tester_ - [keerthanachowdary218](https://github.com/keerthanachowdary218)
+-   **Abhinay Krishna Chitirala** - _Tester_ - [abhinaychitirala](https://github.com/abhinaychitirala)
 
 See the full list of [contributors](https://github.com/aravindvnair99/Email-Application/graphs/contributors) who participated in this project and statistics.
 
