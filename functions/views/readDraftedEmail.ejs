@@ -88,6 +88,13 @@
 															id="receiverUID"
 															hidden
 														/>
+														<input
+															type="text"
+															name="draftID"
+															id="draftID"
+															value="<%= draftID %>"
+															hidden
+														/>
 													</div>
 												</div>
 												<div class="form-group">
@@ -159,12 +166,56 @@
 				$("#registerFormValidation").validate();
 				$("#loginFormValidation").validate();
 				$("#allInputsFormValidation").validate();
+				var payload = {
+					checkEmail: document.getElementById("receiverEmail").value,
+				};
+				fetch("/userIDQuery", {
+					method: "POST",
+					body: new URLSearchParams($.param(payload)),
+				})
+					.then((response) => {
+						if (response.status !== 200) {
+							alert(
+								"Looks like there was a problem. Status Code: " +
+									response.status
+							);
+							return;
+						}
+						response.text().then((data) => {
+							if (data.length == 28 || data.length == 36) {
+								document.getElementById(
+									"receiverUID"
+								).value = data;
+							} else if ((data = "User doesn't exist")) {
+								document.getElementById("receiverEmail").value =
+									"";
+								alert(
+									"User does not exist! Please recheck email."
+								);
+							} else {
+								document.getElementById("receiverEmail").value =
+									"";
+								alert(
+									"User does not exist! Please recheck email."
+								);
+							}
+						});
+					})
+					.catch((err) => {
+						alert("Fetch Error :-S", err);
+					});
 			});
 			$("#draftButton").click(function () {
-				$("#allInputsFormValidation").attr("action", "/draftEmail");
+				$("#allInputsFormValidation").attr(
+					"action",
+					"/updateDraftedEmail"
+				);
 			});
 			$("#submitButton").click(function () {
-				$("#allInputsFormValidation").attr("action", "/sendEmail");
+				$("#allInputsFormValidation").attr(
+					"action",
+					"/sendDraftedEmail"
+				);
 			});
 			$("#receiverEmail").change(() => {
 				var payload = {

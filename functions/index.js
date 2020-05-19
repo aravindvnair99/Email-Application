@@ -529,37 +529,42 @@ app.get("/readSentEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 			res.redirect("/login");
 		});
 });
-app.get("/readDraftedEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
-	db.collection("users")
-		.doc(req.decodedClaims.uid)
-		.collection("draftedEmails")
-		.doc(req.query.ID)
-		.get()
-		.then((doc) => {
-			if (!doc.exists) {
-				console.log("No such document!");
-				return res.redirect("/login");
-			} else {
-				user = Object.assign({}, req.decodedClaims);
-				emailData = Object.assign({}, doc.data());
-				return res.render("readDraftedEmail", {
-					emailID: req.query.ID,
-					emailData,
-					user,
-				});
-			}
-		})
-		.catch((err) => {
-			console.log("Error getting document", err);
-			res.redirect("/login");
-		});
-});
+app.get(
+	"/readDraftedEmail",
+	checkCookieMiddleware,
+	checkValidUser,
+	(req, res) => {
+		db.collection("users")
+			.doc(req.decodedClaims.uid)
+			.collection("draftedEmails")
+			.doc(req.query.ID)
+			.get()
+			.then((doc) => {
+				if (!doc.exists) {
+					console.log("No such document!");
+					return res.redirect("/login");
+				} else {
+					user = Object.assign({}, req.decodedClaims);
+					emailData = Object.assign({}, doc.data());
+					return res.render("readDraftedEmail", {
+						draftID: req.query.ID,
+						emailData,
+						user,
+					});
+				}
+			})
+			.catch((err) => {
+				console.log("Error getting document", err);
+				res.redirect("/login");
+			});
+	}
+);
 app.post("/markAsRead", checkCookieMiddleware, checkValidUser, (req, res) => {
 	db.collection("users")
 		.doc(req.decodedClaims.uid)
 		.collection("receivedEmails")
 		.doc(req.body.emailID)
-		.update({ status: 'read' })
+		.update({ status: "read" })
 		.then(() => {
 			return res.send("Marked as read!");
 		})
@@ -573,7 +578,7 @@ app.post("/markAsUnread", checkCookieMiddleware, checkValidUser, (req, res) => {
 		.doc(req.decodedClaims.uid)
 		.collection("receivedEmails")
 		.doc(req.body.emailID)
-		.update({ status: 'unread' })
+		.update({ status: "unread" })
 		.then(() => {
 			return res.send("Marked as unread!");
 		})
@@ -656,29 +661,6 @@ app.post("/sendEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
 			res.redirect("/login");
 		});
 });
-
-app.post("/draftEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
-	obj = {
-		subject: req.body.subject,
-		message: req.body.message,
-		timestamp: admin.firestore.Timestamp.now().toDate(),
-		to: req.body.receiverEmail,
-		from: req.decodedClaims.email,
-	};
-	db.collection("users")
-		.doc(req.decodedClaims.uid)
-		.collection("draftedEmails")
-		.doc()
-		.set(obj)
-		.then(() => {
-			return res.redirect("/draftedEmails");
-		})
-		.catch((err) => {
-			console.log("Error ", err);
-			res.redirect("/login");
-		});
-});
-
 app.get("/draftedEmails", checkCookieMiddleware, checkValidUser, (req, res) => {
 	var i = 0,
 		emailData = new Array(),
@@ -708,7 +690,108 @@ app.get("/draftedEmails", checkCookieMiddleware, checkValidUser, (req, res) => {
 			res.redirect("/login");
 		});
 });
-
+app.post("/draftEmail", checkCookieMiddleware, checkValidUser, (req, res) => {
+	obj = {
+		subject: req.body.subject,
+		message: req.body.message,
+		timestamp: admin.firestore.Timestamp.now().toDate(),
+		to: req.body.receiverEmail,
+		from: req.decodedClaims.email,
+	};
+	db.collection("users")
+		.doc(req.decodedClaims.uid)
+		.collection("draftedEmails")
+		.doc()
+		.set(obj)
+		.then(() => {
+			return res.redirect("/draftedEmails");
+		})
+		.catch((err) => {
+			console.log("Error ", err);
+			res.redirect("/login");
+		});
+});
+app.post(
+	"/updateDraftedEmail",
+	checkCookieMiddleware,
+	checkValidUser,
+	(req, res) => {
+		db.collection("users")
+			.doc(req.decodedClaims.uid)
+			.collection("draftedEmails")
+			.doc(req.body.draftID)
+			.update({
+				subject: req.body.subject,
+				message: req.body.message,
+				timestamp: admin.firestore.Timestamp.now().toDate(),
+				to: req.body.receiverEmail,
+				from: req.decodedClaims.email,
+			})
+			.then(() => {
+				return res.redirect("/draftedEmails");
+			})
+			.catch((err) => {
+				console.log("Error ", err);
+				res.redirect("/login");
+			});
+	}
+);
+app.post(
+	"/sendDraftedEmail",
+	checkCookieMiddleware,
+	checkValidUser,
+	(req, res) => {
+		console.log(req.body, req.query)
+		db.collection("users")
+			.doc(req.body.receiverUID)
+			.collection("receivedEmails")
+			.doc()
+			.set({
+				subject: req.body.subject,
+				message: req.body.message,
+				timestamp: admin.firestore.Timestamp.now().toDate(),
+				to: req.body.receiverEmail,
+				from: req.decodedClaims.email,
+				status: "unread",
+			})
+			.then(() => {
+				return db
+					.collection("users")
+					.doc(req.decodedClaims.uid)
+					.collection("sentEmails")
+					.doc()
+					.set({
+						subject: req.body.subject,
+						message: req.body.message,
+						timestamp: admin.firestore.Timestamp.now().toDate(),
+						to: req.body.receiverEmail,
+						from: req.decodedClaims.email,
+					})
+					.then(() => {
+						db.collection("users")
+							.doc(req.decodedClaims.uid)
+							.collection("draftedEmails")
+							.doc(req.body.draftID)
+							.delete()
+							.then(() => {
+								return res.redirect("/sentEmails");
+							})
+							.catch((err) => {
+								console.log("Error ", err);
+								res.redirect("/login");
+							});
+					})
+					.catch((err) => {
+						console.log("Error ", err);
+						res.redirect("/login");
+					});
+			})
+			.catch((err) => {
+				console.log("Error ", err);
+				res.redirect("/login");
+			});
+	}
+);
 app.get(
 	"/deleteInboxEmail",
 	checkCookieMiddleware,
