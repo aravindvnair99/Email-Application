@@ -2,19 +2,19 @@
 <html lang="en">
 	<head>
 		<title>Login | Email Application</title>
-		<%- include('components/meta') %> <%- include('components/link') %>
-		<%- include('components/firebaseAuth') %>
+		<%- include('components/meta') %> <%- include('components/link') %> <%-
+		include('components/firebaseAuth') %>
 		<script>
 			function toggleSignIn() {
 				if (firebase.auth().currentUser) {
 					firebase.auth().signOut();
 				} else {
 					if (document.getElementById("email").value.length < 11) {
-						main.showSwal("emailValid");
+						main.showSwal("emailInvalid");
 						return;
 					}
 					if (document.getElementById("password").value.length < 8) {
-						main.showSwal("passwordMatch");
+						main.showSwal("passwordNoMatch");
 						return;
 					}
 					firebase
@@ -34,7 +34,6 @@
 						});
 				}
 			}
-
 			function initApp() {
 				firebase
 					.auth()
@@ -168,7 +167,6 @@
 						</div>
 					</div>
 				</div>
-
 				<footer class="footer footer-transparent">
 					<div class="container">
 						<div class="copyright text-center">
@@ -184,7 +182,6 @@
 			</div>
 		</div>
 		<%- include('components/scripts') %>
-
 		<script type="text/javascript">
 			$().ready(function () {
 				main.checkFullPageBackgroundImage();

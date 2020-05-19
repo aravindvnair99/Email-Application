@@ -150,11 +150,6 @@
 		</div>
 		<%- include('components/scripts') %>
 		<script>
-			$().ready(() => {
-				$("#registerFormValidation").validate();
-				$("#loginFormValidation").validate();
-				$("#allInputsFormValidation").validate();
-			});
 			$("#draftButton").click(function () {
 				$("#allInputsFormValidation").attr("action", "/draftEmail");
 			});

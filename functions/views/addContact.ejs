@@ -105,6 +105,9 @@
 															name="countryCode"
 															class="form-control border-input"
 															autocomplete="tel-country-code"
+															placeholder="Country Code"
+															pattern="^\+\d{1,3}$"
+															title="Should begin with + and must be a country code"
 															required
 														/>
 													</div>
@@ -121,6 +124,7 @@
 															name="mobile"
 															class="form-control border-input"
 															autocomplete="tel-national"
+															placeholder="Mobile number"
 															pattern="^[6-9]\d{9}$"
 															title="10 digit mobile number"
 															required
@@ -183,11 +187,6 @@
 		</div>
 		<%- include('components/scripts') %>
 		<script>
-			$().ready(() => {
-				$("#registerFormValidation").validate();
-				$("#loginFormValidation").validate();
-				$("#allInputsFormValidation").validate();
-			});
 			$("#emailAddress").change(() => {
 				var payload = {
 					checkEmail: document.getElementById("emailAddress").value,

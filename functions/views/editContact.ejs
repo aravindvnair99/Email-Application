@@ -101,10 +101,12 @@
 															id="countryCode"
 															type="tel"
 															name="countryCode"
-															required
 															class="form-control border-input"
 															autocomplete="tel-country-code"
-															value="<%- userProfile.countryCode -%>"
+															placeholder="Country Code"
+															pattern="^\+\d{1,3}$"
+															title="Should begin with + and must be a country code"
+															required
 														/>
 													</div>
 												</div>
@@ -118,12 +120,12 @@
 															id="mobile"
 															type="tel"
 															name="mobile"
-															required
 															class="form-control border-input"
 															autocomplete="tel-national"
-															value="<%- userProfile.mobile -%>"
+															placeholder="Mobile number"
 															pattern="^[6-9]\d{9}$"
-															
+															title="10 digit mobile number"
+															required
 														/>
 													</div>
 												</div>
@@ -185,11 +187,6 @@
 		</div>
 		<%- include('components/scripts') %>
 		<script>
-			$().ready(() => {
-				$("#registerFormValidation").validate();
-				$("#loginFormValidation").validate();
-				$("#allInputsFormValidation").validate();
-			});
 			$("#emailAddress").change(() => {
 				var payload = {
 					checkEmail: document.getElementById("emailAddress").value,

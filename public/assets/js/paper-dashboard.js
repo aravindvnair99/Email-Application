@@ -62,23 +62,6 @@ $(document).ready(function(){
     $('[rel="tooltip"]').tooltip();
 
 
-    $('.switch').bootstrapSwitch({
-        onColor:'primary'
-    });
-
-    $('.switch-plain').bootstrapSwitch({
-        onColor:'',
-        onText: '',
-        offText: ''
-    });
-
-    $('.switch-icon').bootstrapSwitch({
-        onColor:'',
-        onText: '<i class="fa fa-check"></i>',
-        offText: '<i class="fa fa-times"></i>'
-    });
-
-
     //Activate tags
     //removed class label and label-color from tag span and replaced with data-color
     if($(".tagsinput").length != 0){
