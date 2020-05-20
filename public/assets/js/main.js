@@ -152,12 +152,10 @@ main = {
 				.catch(swal.noop);
 		} else {
 			swal({
-				title: "ERROR!",
+				title: "Error!",
 				text: type,
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonText: "Ok",
 				buttonsStyling: false,
+				confirmButtonClass: "btn btn-success btn-fill",
 			});
 		}
 	},
