@@ -190,6 +190,10 @@ app.get("/forgotPassword", (req, res) => {
 		res.render("forgotPassword");
 	}
 });
+app.get("/updatePassword", (req, res) => {
+	res.clearCookie("__session");
+	res.render("updatePassword");
+});
 app.post("/passwordReset", (req, res) => {
 	if (req.cookies.__session) {
 		res.redirect("/inbox");
@@ -741,7 +745,7 @@ app.post(
 	checkCookieMiddleware,
 	checkValidUser,
 	(req, res) => {
-		console.log(req.body, req.query)
+		console.log(req.body, req.query);
 		db.collection("users")
 			.doc(req.body.receiverUID)
 			.collection("receivedEmails")
@@ -768,7 +772,8 @@ app.post(
 						from: req.decodedClaims.email,
 					})
 					.then(() => {
-						return db.collection("users")
+						return db
+							.collection("users")
 							.doc(req.decodedClaims.uid)
 							.collection("draftedEmails")
 							.doc(req.body.draftID)
