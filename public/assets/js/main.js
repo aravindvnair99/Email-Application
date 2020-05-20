@@ -31,7 +31,7 @@ main = {
 		} else if (type == "wrongPattern") {
 			swal({
 				title:
-					"Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters",
+					"Password must contain at least one number, one upper case, one lower case, and at least 8 or more characters",
 				buttonsStyling: false,
 				confirmButtonClass: "btn btn-success btn-fill",
 			});
@@ -152,12 +152,10 @@ main = {
 				.catch(swal.noop);
 		} else {
 			swal({
-				title: "ERROR!",
+				title: "Error!",
 				text: type,
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonText: "Ok",
 				buttonsStyling: false,
+				confirmButtonClass: "btn btn-success btn-fill",
 			});
 		}
 	},

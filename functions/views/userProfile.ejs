@@ -88,6 +88,17 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
+														<button
+															class="btn btn-fill btn-wd"
+															type="button"
+															onclick="location.href='/updatePassword'"
+														>
+															Update Password
+														</button>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
 														<label for="DOB"
 															>Date of
 															Birth</label
@@ -264,6 +275,7 @@
 															placeholder="Postal Code"
 															required
 															autocomplete="postal-code"
+															pattern="^[0-9]{6}$"
 															value="<%- userProfile.postalCode -%>"
 														/>
 													</div>
@@ -320,8 +332,15 @@
 			document.getElementById(
 				"mobile"
 			).value = `<%- user.phone_number -%>`.slice(-10);
-			document.getElementById("DOB").min = Date.now() - 10;
-			document.getElementById("DOB").max = Date.now() - 10;
+			var date = new Date();
+			var DD = (date.getDate() < 10 ? "0" : "") + date.getDate();
+			var MM =
+				(date.getMonth() + 1 < 10 ? "0" : "") + (date.getMonth() + 1);
+			var YYYY = date.getFullYear();
+			document.getElementById("DOB").min =
+				YYYY - 100 + "-" + MM + "-" + DD;
+			document.getElementById("DOB").max =
+				YYYY - 13 + "-" + MM + "-" + DD;
 		</script>
 	</body>
 </html>
