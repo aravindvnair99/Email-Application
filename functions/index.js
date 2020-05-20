@@ -311,6 +311,24 @@ app.post("/onUpdateProfile", checkCookieMiddleware, (req, res) => {
 			console.log("Error updating user:", error);
 		});
 });
+app.get("/deleteProfile", checkCookieMiddleware, checkValidUser, (req, res) => {
+	admin
+		.auth()
+		.deleteUser(req.decodedClaims.uid)
+		.then(() => {
+			db.collection("users")
+				.doc(req.decodedClaims.uid)
+				.delete()
+				.catch((err) => {
+					console.log("Error getting document", err);
+					return res.redirect("/signOut");
+				});
+			return res.redirect("/signOut");
+		})
+		.catch((error) => {
+			console.log("Error deleting user:", error);
+		});
+});
 app.post("/userQuery", (req, res) => {
 	admin
 		.auth()
