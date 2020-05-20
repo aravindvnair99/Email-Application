@@ -325,7 +325,7 @@ app.get("/deleteProfile", checkCookieMiddleware, checkValidUser, (req, res) => {
 				});
 			return res.redirect("/signOut");
 		})
-		.catch(function (error) {
+		.catch((error) => {
 			console.log("Error deleting user:", error);
 		});
 });
