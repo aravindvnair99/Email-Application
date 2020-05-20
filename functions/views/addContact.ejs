@@ -72,6 +72,8 @@
 															autocomplete="bday"
 															required
 															autofocus
+															min="2018-01-01"
+															max="2018-12-31"
 														/>
 													</div>
 												</div>
@@ -187,6 +189,15 @@
 		</div>
 		<%- include('components/scripts') %>
 		<script>
+			var date = new Date();
+			var DD = (date.getDate() < 10 ? "0" : "") + date.getDate();
+			var MM =
+				(date.getMonth() + 1 < 10 ? "0" : "") + (date.getMonth() + 1);
+			var YYYY = date.getFullYear();
+			document.getElementById("DOB").min =
+				YYYY - 100 + "-" + MM + "-" + DD;
+			document.getElementById("DOB").max =
+				YYYY - 13 + "-" + MM + "-" + DD;
 			$("#emailAddress").change(() => {
 				var payload = {
 					checkEmail: document.getElementById("emailAddress").value,
