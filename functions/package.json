@@ -35,7 +35,7 @@
 		"logs": "firebase functions:log"
 	},
 	"engines": {
-		"node": "8"
+		"node": "10"
 	},
 	"dependencies": {
 		"cookie-parser": "^1.4.5",
@@ -45,7 +45,7 @@
 		"firebase-functions": "^3.6.1"
 	},
 	"devDependencies": {
-		"eslint": "^6.8.0",
+		"eslint": "^7.1.0",
 		"eslint-plugin-promise": "^4.2.1",
 		"firebase-functions-test": "^0.2.1"
 	},
