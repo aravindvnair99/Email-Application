@@ -1,6 +1,6 @@
 {
 	"name": "se-lab-email",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "SE Lab Email PWA",
 	"keywords": [
 		"PWA",
@@ -45,7 +45,7 @@
 		"firebase-functions": "^3.13.1"
 	},
 	"devDependencies": {
-		"eslint": "^7.2.0",
+		"eslint": "^7.19.0",
 		"eslint-plugin-promise": "^4.3.1",
 		"firebase-functions-test": "^0.2.3"
 	},
