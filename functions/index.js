@@ -68,7 +68,7 @@ function setCookieLogin(idToken, res) {
 				const options = {
 					maxAge: expiresIn,
 					httpOnly: true,
-					secure: false, //should be true in prod
+					secure: true,
 				};
 				res.cookie("__session", sessionCookie, options);
 				admin
