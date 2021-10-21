@@ -47,7 +47,7 @@
 	"devDependencies": {
 		"eslint": "^7.28.0",
 		"eslint-plugin-promise": "^5.1.1",
-		"firebase-functions-test": "^0.3.2"
+		"firebase-functions-test": "^0.3.3"
 	},
 	"private": true
 }
